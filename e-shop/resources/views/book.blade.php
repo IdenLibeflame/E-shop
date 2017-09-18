@@ -33,7 +33,6 @@
                             <div class="form-group">
                                 <textarea name="new-post" id="new-post" rows="2" class="form-control" placeholder="Your comment"></textarea>
                                 <br>
-{{--                                <text>{{ Имя автора }}</text>--}}
                                 <input type="hidden" value="{{ Auth::id() }}" name="_userId">
                                 <input type="hidden" value="{{ $book_id }}" name="_productId">
                                 <button type="submit" class="btn btn-primary">Create comment</button>
@@ -42,59 +41,14 @@
                         </form>
                     </div>
                 </section>
-
-                <section class="row posts">
+            </div>
+                <section class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <header><h3>What other people thinks</h3></header>
-                        {{--@foreach($commentsByIdUnic as $commentById)--}}
-                            {{--@if($commentById == $b->id)--}}
-                                {{--@foreach($productComments as $productComment)--}}
-                                    {{--@foreach($postedByName as $pbn)--}}
-                                    {{--<article class="post">{{ $productComment }}</article>--}}
-                                    {{--<div class="interaction">--}}
-                                        {{--<a href="#">--}}
-                                            {{--Like--}}
-                                        {{--</a>--}}
-                                        {{--<a href="#">--}}
-                                            {{--Dislike--}}
-                                        {{--</a>--}}
-                                        {{--total--}}
-                                    {{--</div>--}}
-                                    {{--<div class="info">--}}
-                                        {{--@foreach($postedByIdUnic as $postedById)--}}
-                                            {{--@if($postedById == $b->id)--}}
-                                                {{--@foreach($postedByNameUnic as $postedByName)--}}
-                                                    {{--Posted by {{ $postedByName }}--}}
-                                                {{--@endforeach--}}
-                                            {{--@endif--}}
-                                        {{--@endforeach--}}
-                                            {{--@foreach($array as $id => $name)--}}
-                                                {{--@if($id == $b->id)--}}
-                                                    {{--Posted by {{ $name }}--}}
-                                                {{--@endif--}}
-                                            {{--@endforeach--}}
-
-                                                {{--Posted by {{ $pbn }}--}}
-
-                                    {{--</div>--}}
-                                    {{--@endforeach--}}
-                                {{--@endforeach--}}
-                            {{--@endif--}}
-                        {{--@endforeach--}}
-
-{{--                        @for($i = 0; $i < $count; $i++)--}}
-{{--                            @for()--}}
-{{--                            @foreach($commentsByIdUnic as $commentById)--}}
-{{--                                @if($commentById == $b->id)--}}
-
-                                    @foreach($comments as $comment)
-{{--                                        @foreach($postedByName as $pbn)--}}
-
-
-
-                                            <article class="post">{{ $comment->comment}}</article>
-                                            {{--<article class="post">{{ $productComments[$i] }}</article>--}}
-
+                            @foreach($comments as $comment)
+                                            {{--<article class="post" data-commentid={{ $comment->id }}>{{ $comment->comment}}--}}
+                            <article class="post">{{ $comment->comment}}
+                                        @if(Auth::user())
 
                                             <div class="interaction">
                                                 <a href="#">
@@ -104,51 +58,57 @@
                                                     Dislike
                                                 </a>
                                                 total
+
+                                                <br>
+                                                {{--<div class="info">--}}
+                                                    Posted by {{ $comment->user->name }}
+                                                {{--</div>--}}
                                             </div>
-                                            <div class="info">
+                                        @endif
+                                        @if(Auth::user() == $comment->user)
 
-{{--                                                Posted by {{ $nameOfWriterComment[$i] }}--}}
-                                                Posted by {{ $comment->user->name }}
-
-
+                                            <div>
+                                                <a href="#" class="edit">Edit</a>
+                                                <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}">Delete</a>
                                             </div>
-                                        {{--@endforeach--}}
-                                    {{--@endforeach--}}
-                                {{--@endif--}}
-                                    {{--@endfor--}}
+
+                                        @endif
+                                            </article>
                             @endforeach
                         {{--@endfor--}}
-
-
-
                     </div>
                 </section>
-
-
-
-                {{--@foreach($test as $t)--}}
-                    {{--@if($t == $b->id)--}}
-                        {{--@foreach($productComments as $productComment)--}}
-                            {{--<ul>--}}
-                                {{--<li>{{ $productComment }}</li>--}}
-
-                                {{--<a href="#">--}}
-                                    {{--Like--}}
-                                {{--</a>--}}
-                                {{--<a href="#">--}}
-                                    {{--Dislike--}}
-                                {{--</a>--}}
-                                {{--total--}}
-                            {{--</ul>--}}
-                        {{--@endforeach--}}
-                    {{--@endif--}}
-                {{--@endforeach--}}
-            </div>
-
         @endforeach
 
     </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="comment-comment">Edit the Comment</label>
+                            <textarea class="form-control" name="post-body" id="post-body" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script>
+        var token = "{{ Session::token() }}";
+        var url = "{{ route('edit') }}";
+    </script>
     @endsection
     </body>
     </html>
