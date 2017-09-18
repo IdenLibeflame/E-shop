@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>E-SHOP</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Styles -->
+
+    <link rel="stylesheet" href="{{ URL::to('src/img/img.css') }}">
+</head>
+<body>
+<div align="center">
+    <div class="btn-group btn-group-justified">
+        <a href="/" class="btn btn-danger">My shop!</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" align="center">
+        <div class="btn-group btn-group-justified">
+            <a href="/basket" class="btn btn-warning">basket</a>
+            <a href="#" class="btn btn-warning">search</a>
+            <a href="/genre" class="btn btn-warning">genre</a>
+            <a href="#" class="btn btn-warning">profile</a>
+
+            @if (Route::has('login'))
+                @auth
+
+                <a href="{{ route('logout') }}" class="btn btn-warning"
+                   onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">Logout </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+
+            @else
+                <a href="{{ route('login') }}" class="btn btn-danger btn-lg">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-danger btn-lg">Register</a>
+                @endauth
+            @endif
+            {{--<a href="#" class="btn btn-warning">{{ $name }}</a>--}}
+
+        </div>
+    </div>
+    @yield('content')
+
+
+</div>
