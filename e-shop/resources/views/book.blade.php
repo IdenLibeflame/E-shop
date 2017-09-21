@@ -46,17 +46,13 @@
                     <div class="col-md-6 col-md-offset-3">
                         <header><h3>What other people thinks</h3></header>
                             @foreach($comments as $comment)
-                                            {{--<article class="post" data-commentid={{ $comment->id }}>{{ $comment->comment}}--}}
-                            <article class="post">{{ $comment->comment}}
+                                            <article class="post" data-commentid={{ $comment->id }}>{{ $comment->comment}}
+{{--                            <article class="post">{{ $commenTt->comment}}--}}
                                         @if(Auth::user())
 
                                             <div class="interaction">
-                                                <a href="#">
-                                                    Like
-                                                </a>
-                                                <a href="#">
-                                                    Dislike
-                                                </a>
+                                                <a href="#">Like</a>
+                                                <a href="#">Dislike</a>
                                                 total
 
                                                 <br>
@@ -67,7 +63,7 @@
                                         @endif
                                         @if(Auth::user() == $comment->user)
 
-                                            <div>
+                                            <div class="test">
                                                 <a href="#" class="edit">Edit</a>
                                                 <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}">Delete</a>
                                             </div>
@@ -92,8 +88,8 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="comment-comment">Edit the Comment</label>
-                            <textarea class="form-control" name="post-body" id="post-body" rows="5"></textarea>
+                            <label for="comment">Edit the Comment</label>
+                            <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
                         </div>
                     </form>
                 </div>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
@@ -39,5 +40,22 @@ class CommentController extends Controller
         DB::table('comments')->where('id', $comment_id)->delete();
 
         return redirect()->back();
+    }
+
+
+    public function editComment(Request $request)
+    {
+        $this->validate($request, [
+            'comment' => 'required'
+        ]);
+
+        $comment = Comment::find($request['commentId']);
+
+        $comment->comment = $request['comment'];
+
+        $comment->update();
+
+//        return response()->json(['new_comment' => $comment->comment], 200);
+        return Response::json(['new_comment' => $comment->comment]);
     }
 }

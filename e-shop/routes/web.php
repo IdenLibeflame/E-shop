@@ -39,10 +39,14 @@ Route::get('/deletecomment/{comment_id}', [
     'as' => 'comment.delete'
 ]);
 
-Route::post('/edit', function (\Illuminate\Http\Request $request) {
-   return response()->json(['message' => $request]);
-})->name('edit');
+//Route::post('/edit', function (\Illuminate\Http\Request $request) {
+//   return response()->json(['message' => $request['commentId']]);
+//})->name('edit');
 
+Route::post('/edit', [
+    'uses' => 'CommentController@editComment',
+    'as' => 'edit'
+]);
 
 Route::get('profile', function () {
     // Только аутентифицированные пользователи могут зайти...

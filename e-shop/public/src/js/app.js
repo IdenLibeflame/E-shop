@@ -1,12 +1,15 @@
 var commentId = 0;
+var commentTextElement = null;
 
-$('.post').on('click', function (event) {
+$('.edit').on('click', function (event) {
     event.preventDefault();
 
-    var commentText = event.target.parentNode.parentNode.childNodes[0].textContent;
+    commentTextElement = event.target.parentNode.parentNode.childNodes[0];
+    var commentText = commentTextElement.textContent;
     commentId = event.target.parentNode.parentNode.dataset['commentid'];
 
-    $('#post-body').val(commentText);
+    $('#comment').val(commentText);
+
     $('#edit-modal').modal();
 });
 
@@ -15,11 +18,12 @@ $('.post').on('click', function (event) {
 
 $('#modal-save').on('click', function () {
    $.ajax({
-       method: "POST",
+       method: 'POST',
        url: url,
-       data: {body: $('#post-body').val(), commentId: commentId, _token: token}
+       data: {comment: $('#comment').val(), commentId: commentId, _token: token}
    })
        .done(function (msg) {
-       console.log(msg['message']);
+           $(commentTextElement).text(msg['new_comment']);
+           $('#edit-modal').modal('hide');
     });
 });
