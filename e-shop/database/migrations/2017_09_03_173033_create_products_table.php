@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->float('price')->unsigned();
             $table->float('current_price')->unsigned()->nullable();
             $table->integer('availability')->unsigned();
-            $table->float('discount')->unsigned();
+            $table->float('discount')->unsigned()->nullable();
             $table->string('genre_name');
             $table->string('image');
             $table->timestamps();

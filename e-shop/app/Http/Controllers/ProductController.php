@@ -22,7 +22,7 @@ class ProductController extends Controller
 
 
         foreach ($products as $product) {
-            if ($product->genre_name == $name) {
+             if ($product->genre_name == $name) {
                 if ($product->discount > 0) {
                     $product->current_price = $product->price - $product->price * $product->discount;
                     DB::table('products')
@@ -50,9 +50,9 @@ class ProductController extends Controller
 
                 } else {
                     $product->current_price = $product->price;
-                    DB::table('product')
+                    DB::table('products')
                         ->where('id', $product->id)
-                        ->update('current_price', $product->current_price);
+                        ->update(['current_price' => $product->current_price]);
 
                     $temps = DB::table('products')
                         ->where('genre_name', $name)->get();

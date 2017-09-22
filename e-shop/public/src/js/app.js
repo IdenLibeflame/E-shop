@@ -16,14 +16,32 @@ $('.edit').on('click', function (event) {
 
 // $('.modal fade').find('.modal-dialog').find('.modal-content').find('.modal-footer').find('.btn-primary').on('click', function () {
 
-$('#modal-save').on('click', function () {
-   $.ajax({
-       method: 'POST',
-       url: url,
-       data: {comment: $('#comment').val(), commentId: commentId, _token: token}
-   })
-       .done(function (msg) {
-           $(commentTextElement).text(msg['new_comment']);
-           $('#edit-modal').modal('hide');
+// $( document ).ready(function() {
+    $('#modal-save').on('click', function () {
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: {comment: $('#comment').val(), commentId: commentId, _token: token}
+        })
+            .done(function (msg) {
+                $(commentTextElement).text(msg['new_comment']);
+                $('#edit-modal').modal('hide');
+            });
     });
+// });
+
+$('.like').on('click', function (event) {
+    event.preventDefault();
+    commentId = event.target.parentNode.parentNode.dataset['commentid'];
+    var isLike = event.target.previousElementSibling == null;
+
+    $.ajax({
+       method: 'POST',
+        url: urlLike,
+        data: {isLike: isLike, commentId: commentId, _token: token}
+    })
+        .done(function () {
+            
+        });
 });
+

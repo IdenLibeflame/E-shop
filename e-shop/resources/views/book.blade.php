@@ -46,13 +46,13 @@
                     <div class="col-md-6 col-md-offset-3">
                         <header><h3>What other people thinks</h3></header>
                             @foreach($comments as $comment)
-                                            <article class="post" data-commentid={{ $comment->id }}>{{ $comment->comment}}
+                                            <article class="post" data-commentId={{ $comment->id }}>{{ $comment->comment}}
 {{--                            <article class="post">{{ $commenTt->comment}}--}}
                                         @if(Auth::user())
 
                                             <div class="interaction">
-                                                <a href="#">Like</a>
-                                                <a href="#">Dislike</a>
+                                                <a href="#" class="like">Like</a>
+                                                <a href="#" class="like">Dislike</a>
                                                 total
 
                                                 <br>
@@ -104,6 +104,7 @@
     <script>
         var token = "{{ Session::token() }}";
         var url = "{{ route('edit') }}";
+        var urlLike = "{{ route('like') }}";
     </script>
     @endsection
     </body>

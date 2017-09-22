@@ -48,6 +48,11 @@ Route::post('/edit', [
     'as' => 'edit'
 ]);
 
+Route::post('/like', [
+    'uses' => 'CommentController@likeComment',
+    'as' => 'like'
+]);
+
 Route::get('profile', function () {
     // Только аутентифицированные пользователи могут зайти...
 })->middleware('auth');

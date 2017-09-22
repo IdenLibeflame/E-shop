@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +56,48 @@ class CommentController extends Controller
 
         $comment->update();
 
-//        return response()->json(['new_comment' => $comment->comment], 200);
-        return Response::json(['new_comment' => $comment->comment]);
+        return response()->json(['new_comment' => $comment->comment], 200);
+//        return Response::json(['new_comment' => $comment->comment], 200);
+    }
+
+    public function likeComment(Request $request)
+    {
+        $comment_id = $request['commentId'];
+        $is_like = $request['isLike'] === 'true';
+        $update = false;
+        $comment = Comment::find($comment_id);
+        if (!$comment) {
+            return null;
+        }
+
+        $user = Auth::user();
+        $like = $user->likes()->where('comment_id', $comment_id)->first();
+
+        if ($like) {
+            // Получаем значение поля "лайк", хранящееся в базе
+            // (если он есть для этого коммента от этого юзера)
+            $already_like = $like->like;
+            $update = true;
+            if ($already_like == $is_like) {
+                // Если значение поля "лайк" в базе равно значению,
+                // Переданному через форму - удаляем его (снимаем лайк)
+                $like->delete();
+                return null;
+            }
+        } else {
+            $like = new Like();
+        }
+
+        $like->like = $is_like;
+        $like->user_id = $user->id;
+        $like->comment_id = $comment_id;
+
+        if ($update) {
+            $like->update();
+        } else {
+            $like->save();
+        }
+
+        return null;
     }
 }
