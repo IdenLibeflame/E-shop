@@ -41,7 +41,12 @@ $('.like').on('click', function (event) {
         data: {isLike: isLike, commentId: commentId, _token: token}
     })
         .done(function () {
-            
+            event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this comment' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this comment' : 'Dislike';
+            if (isLike) {
+                event.target.nextElementSibling.innerText = 'Dislike';
+            } else {
+                event.target.previousElementSibling.innerText = 'Like';
+            }
         });
 });
 

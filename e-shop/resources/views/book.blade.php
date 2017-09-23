@@ -51,8 +51,8 @@
                                         @if(Auth::user())
 
                                             <div class="interaction">
-                                                <a href="#" class="like">Like</a>
-                                                <a href="#" class="like">Dislike</a>
+                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->like == 1 ? 'You like this comment' : 'Like' : 'Like' }}</a>
+                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->like == 0 ? 'You don\'t like this comment' : 'Dislike' : 'Dislike' }}</a>
                                                 total
 
                                                 <br>
