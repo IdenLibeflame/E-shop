@@ -1,5 +1,6 @@
 .thumbnail img {
-    max-height: 250px;
+    max-height: 350px;
+    max-width: 180px;
 
 }
 
@@ -7,12 +8,18 @@
     /*margin-left: 15px;*/
 /*}*/
 
-.cat div {
-    width: 150px;
-    height: 250px;
-}
+/*.cat div {*/
+    /*width: 150px;*/
+    /*height: 250px;*/
+/*}*/
 
-.add-to-basket div {
-    height: 30px;
-    width: 50px;
+/*.add-to-basket div {*/
+    /*height: 30px;*/
+    /*width: 50px;*/
+/*}*/
+
+
+.price {
+    font-weight: bold;
+    font-size: 16px;
 }

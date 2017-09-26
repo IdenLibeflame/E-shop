@@ -23,7 +23,7 @@
 
 
                     <div class="btn-group btn-group-justified" style="height: 30px; width: 150px">
-                        <a href="#" class="btn btn-warning">Add to basket</a>
+                        <a href="{{ route('basket.addToBasket', ['id' => $b->id]) }}" class="btn btn-warning">Add to basket</a>
                     </div>
                 </ul>
 

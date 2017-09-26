@@ -27,7 +27,7 @@ Route::get('/genre/{name}/{id}', 'ProductController@product')->name('name');
 Route::get('/genre/{name}/book/{book_id}', 'ProductController@book')->name('a', 'book_id');
 
 
-Route::get('/basket', 'BasketController@index');
+
 
 Route::post('/createcomment', [
     'uses' => 'CommentController@createComment',
@@ -56,6 +56,13 @@ Route::post('/like', [
 Route::get('profile', function () {
     // Только аутентифицированные пользователи могут зайти...
 })->middleware('auth');
+
+Route::get('/basket', 'BasketController@getBasket');
+
+Route::get('/add-to-basket/{id}', [
+    'uses' => 'BasketController@addToBasket',
+    'as' => 'basket.addToBasket'
+]);
 
 // Это можно будет засунуть в контроллер вместо кода выше
 //public function __construct()

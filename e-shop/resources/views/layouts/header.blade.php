@@ -16,7 +16,8 @@
 
     <!-- Styles -->
 
-    <link rel="stylesheet" href="{{ URL::to('src/img/img.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('\src\img\img.css') }}">
+    @yield('styles')
 </head>
 <body>
 <div align="center">
@@ -28,7 +29,10 @@
 <div class="container">
     <div class="row" align="center">
         <div class="btn-group btn-group-justified">
-            <a href="/basket" class="btn btn-warning">basket</a>
+            <a href="/basket" class="btn btn-warning">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> basket
+                <span class="badge">{{ Session::has('basket') ? Session::get('basket')->totalQuantity : '' }}</span>
+            </a>
             <a href="#" class="btn btn-warning">search</a>
             <a href="/genre" class="btn btn-warning">genre</a>
             <a href="#" class="btn btn-warning">profile</a>
@@ -60,5 +64,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/b3a03bdfa0.js"></script>
 <script src="{{ URL::to('src/js/app.js') }}"></script>
 
