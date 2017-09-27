@@ -1,7 +1,21 @@
 @extends('layouts.header')
 
 @section('content')
+
+
+
     @if(Session::has('basket'))
+
+        @if(Session::has('success'))
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+                    <div id="charge-message" class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
                 <ul class="list-group">
@@ -35,7 +49,7 @@
 
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <button type="button" class="btn btn-success">Checkout</button>
+                <a href="{{ route('checkout') }}" type="button" class="btn btn-success">Checkout</a>
             </div>
         </div>
     @else
@@ -47,4 +61,8 @@
     @endif
 @endsection
 
+@section('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ URL::to('src/js/checkout.js') }}"></script>
+@endsection
 

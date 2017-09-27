@@ -64,6 +64,15 @@ Route::get('/add-to-basket/{id}', [
     'as' => 'basket.addToBasket'
 ]);
 
+Route::get('checkout', 'BasketController@getCheckout')->name('checkout');
+
+//Route::get('checkout',[
+//   'uses' => 'BasketController@getCheckout',
+//    'as' => 'checkout'
+//]);
+
+Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
+
 // Это можно будет засунуть в контроллер вместо кода выше
 //public function __construct()
 //{
