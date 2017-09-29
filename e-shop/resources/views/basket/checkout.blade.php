@@ -13,7 +13,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" class="form-control" name="name" required>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" class="form-control" required>
+                        <input type="text" id="address" class="form-control" name="address" required>
                     </div>
                 </div>
 
@@ -43,15 +43,15 @@
                     <div class="row"></div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="cart-expiry-month">Expiration Month</label>
-                                <input type="text" id="cart-expiry-month" class="form-control" required>
+                                <label for="card-expiry-month">Expiration Month</label>
+                                <input type="text" id="card-expiry-month" class="form-control" required>
                             </div>
                         </div>
 
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="cart-expiry-year">Expiration Year</label>
-                            <input type="text" id="cart-expiry-year" class="form-control" required>
+                            <label for="card-expiry-year">Expiration Year</label>
+                            <input type="text" id="card-expiry-year" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-xs-12">
@@ -65,7 +65,21 @@
                 <button class="btn btn-success" type="submit">Buy Now</button>
             </form>
         </div>
+
+        {{--<form action="{{ route('/') }}" method="POST">--}}
+            {{--<script--}}
+                    {{--src="https://checkout.stripe.com/checkout.js" class="stripe-button"--}}
+                    {{--data-key="pk_test_1tmrqU5LNTyD10N10a657Xhn"--}}
+                    {{--data-amount="999"--}}
+                    {{--data-name="Demo Site"--}}
+                    {{--data-description="Widget"--}}
+                    {{--data-image="https://stripe.com/img/documentation/checkout/marketplace.png"--}}
+                    {{--data-locale="auto">--}}
+            {{--</script>--}}
+        {{--</form>--}}
     </div>
+
+
 
 @endsection
 

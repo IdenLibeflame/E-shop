@@ -26,8 +26,9 @@ Route::get('/genre/{name}/{id}', 'ProductController@product')->name('name');
 
 Route::get('/genre/{name}/book/{book_id}', 'ProductController@book')->name('a', 'book_id');
 
+Route::get('/reduce/{id}', 'BasketController@reduceByOne');
 
-
+Route::get('/remove/{id}', 'BasketController@removeItem');
 
 Route::post('/createcomment', [
     'uses' => 'CommentController@createComment',

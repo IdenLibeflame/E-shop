@@ -1,11 +1,16 @@
 var stripe = Stripe('pk_test_1tmrqU5LNTyD10N10a657Xhn');
 
+
+// var stripe = require("stripe")(
+//     "sk_test_oZVNrFVvcQ7W7MujpdSO9uCA"
+// );
+
 var $form = $('#checkout-form');
 
 $form.submit(function (event) {
     $('#charge-error').addClass('hidden');
-    $form.find('button').prop('disabled', true);
-    stripe.createToken({
+    // $form.find('button').prop('disabled', true);
+    stripe.card.createToken({
         number: $('#card-number').val(),
         cvc: $('#card-cvc').val(),
         exp_month: $('#card-expiry-month').val(),

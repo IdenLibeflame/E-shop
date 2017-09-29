@@ -29,8 +29,9 @@
                                     Action <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="">Reduce by 1</a></li>
-                                    <li><a href="">Reduce All</a></li>
+                                    {{--<li><a href="{{ route('/reduce/{id}', ['id' => $product['item']['id']]) }}">Reduce by 1</a></li>--}}
+                                    <li><a href="/reduce/{{ $product['item']['id'] }}">Reduce by 1</a></li>
+                                    <li><a href="/remove/{{ $product['item']['id'] }}">Reduce All</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -61,8 +62,8 @@
     @endif
 @endsection
 
-@section('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{ URL::to('src/js/checkout.js') }}"></script>
-@endsection
+{{--@section('scripts')--}}
+    {{--<script src="https://js.stripe.com/v3/"></script>--}}
+    {{--<script src="{{ URL::to('src/js/checkout.js') }}"></script>--}}
+{{--@endsection--}}
 

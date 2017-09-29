@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Stripe\Customer;
 use Stripe\Stripe;
@@ -27,6 +29,36 @@ class BasketController extends Controller
 //        dd($basket);
         $request->session()->put('basket', $basket);
 //        dd($request->session()->get('basket'));
+        return redirect()->back();
+    }
+
+    public function reduceByOne($id)
+    {
+        $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+        $basket = new Basket($oldBasket);
+        $basket->reduceByOne($id);
+
+        if (count($basket->items)) {
+            Session::put('basket', $basket);
+        } else {
+            Session::forget('basket');
+        }
+
+        return redirect()->back();
+    }
+
+    public function removeItem($id)
+    {
+        $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+        $basket = new Basket($oldBasket);
+        $basket->reduceItem($id);
+
+        if (count($basket->items)) {
+            Session::put('basket', $basket);
+        } else {
+            Session::forget('basket');
+        }
+
         return redirect()->back();
     }
 
@@ -66,17 +98,19 @@ class BasketController extends Controller
 
         Stripe::setApiKey('sk_test_oZVNrFVvcQ7W7MujpdSO9uCA');
         try {
-            Charge::create(array(
+            $charge = Charge::create(array(
                 "amount" => $basket->totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->input('stripeToken'), // obtained with Stripe.js
                 "description" => "Test Charge"
             ));
 
-//            Customer::create(array(
-//                "description" => "Test Customer",
-//                "source" => $request->input('stripeToken')
-//            ));
+            $order = new Order();
+            $order->basket = serialize($basket);
+            $order->address = $request->input('address');
+            $order->name = $request->input('name');
+            $order->payment_id = $charge->id;
+            Auth::user()->orders()->save($order);
 
         } catch (\Exception $e) {
             return redirect()->route('checkout')->with('error', $e->getMessage());
