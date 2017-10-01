@@ -8,6 +8,7 @@
             <div class="alert alert-danger {{ !Session::has('error') ? 'hidden' : '' }}" id="charge-error">
                 {{ Session::get('error') }}
             </div>
+
             <form action="{{ route('checkout') }}" method="post" id="checkout-form">
                 <div class="rov">
                     <div class="col-xs-12">
@@ -65,20 +66,9 @@
                 <button class="btn btn-success" type="submit">Buy Now</button>
             </form>
         </div>
-
-        {{--<form action="{{ route('/') }}" method="POST">--}}
-            {{--<script--}}
-                    {{--src="https://checkout.stripe.com/checkout.js" class="stripe-button"--}}
-                    {{--data-key="pk_test_1tmrqU5LNTyD10N10a657Xhn"--}}
-                    {{--data-amount="999"--}}
-                    {{--data-name="Demo Site"--}}
-                    {{--data-description="Widget"--}}
-                    {{--data-image="https://stripe.com/img/documentation/checkout/marketplace.png"--}}
-                    {{--data-locale="auto">--}}
-            {{--</script>--}}
-        {{--</form>--}}
     </div>
 
+    <input type="hidden" id="user-id" value="{{ auth()->id() }}">
 
 
 @endsection

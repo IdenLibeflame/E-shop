@@ -3,27 +3,27 @@
 @section('content')
 
     <div class="row" align="center">
-        @foreach($book as $b)
+{{--        @foreach($bookook as $book)--}}
             <div class="col-xs-6 col-md-4 col-lg-3 cat" style="width: 220px">
                 <ul>
-                    <img src="{{ $b->image }}" alt="..." style="max-height: 250px;">
-                    <li>{{ $b->id }}</li>
-                    <li>{{ $b->name }}</li>
-                    <li>{{ $b->writer }}</li>
-                    <li>{{ $b->description }}</li>
-                    <li>{{ $b->price }}</li>
-                    @if($b->discount > 0)
-                        <li>{{ $b->discount }}</li>
-                        <li>{{ $b->current_price }}</li>
+                    <img src="{{ $book->image }}" alt="..." style="max-height: 250px;">
+                    <li>{{ $book->id }}</li>
+                    <li>{{ $book->name }}</li>
+                    <li>{{ $book->writer }}</li>
+                    <li>{{ $book->description }}</li>
+                    <li>{{ $book->price }}</li>
+                    @if($book->discount > 0)
+                        <li>{{ $book->discount }}</li>
+                        <li>{{ $book->current_price }}</li>
                     @endif
-                    <li>{{ $b->availability }}</li>
+                    <li>{{ $book->availability }}</li>
 
 
 
 
 
                     <div class="btn-group btn-group-justified" style="height: 30px; width: 150px">
-                        <a href="{{ route('basket.addToBasket', ['id' => $b->id]) }}" class="btn btn-warning">Add to basket</a>
+                        <a href="{{ route('basket.addToBasket', ['id' => $book->id]) }}" class="btn btn-warning">Add to basket</a>
                     </div>
                 </ul>
 
@@ -34,7 +34,7 @@
                                 <textarea name="new-post" id="new-post" rows="2" class="form-control" placeholder="Your comment"></textarea>
                                 <br>
                                 <input type="hidden" value="{{ Auth::id() }}" name="_userId">
-                                <input type="hidden" value="{{ $book_id }}" name="_productId">
+                                <input type="hidden" value="{{ $book->id }}" name="_productId">
                                 <button type="submit" class="btn btn-primary">Create comment</button>
                                 <input type="hidden" value="{{ Session::token() }}" name="_token">
                             </div>
@@ -45,8 +45,8 @@
                 <section class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <header><h3>What other people thinks</h3></header>
-                            @foreach($comments as $comment)
-                                            <article class="post" data-commentId={{ $comment->id }}>{{ $comment->comment}}
+                            @foreach($book->comments as $comment)
+                                            <article class="post" data-commentId="{{ $comment->id }}"><span>{{ $comment->comment}}</span>
 {{--                            <article class="post">{{ $commenTt->comment}}--}}
                                         @if(Auth::user())
 
@@ -74,7 +74,7 @@
                         {{--@endfor--}}
                     </div>
                 </section>
-        @endforeach
+        {{--@endforeach--}}
 
     </div>
     </div>

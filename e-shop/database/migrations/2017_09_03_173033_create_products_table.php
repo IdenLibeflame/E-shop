@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->float('current_price')->unsigned()->nullable();
             $table->integer('availability')->unsigned();
             $table->float('discount')->unsigned()->nullable();
-            $table->string('genre_name');
+            $table->string('genre_name'); // заменить на foreign key
             $table->string('image');
             $table->timestamps();
         });

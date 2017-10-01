@@ -33,7 +33,7 @@
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> basket
                 <span class="badge">{{ Session::has('basket') ? Session::get('basket')->totalQuantity : '' }}</span>
             </a>
-            <a href="#" class="btn btn-warning">search</a>
+            <a href="/search" class="btn btn-warning">search</a>
             <a href="/genre" class="btn btn-warning">genre</a>
             <a href="#" class="btn btn-warning">profile</a>
 
@@ -67,4 +67,5 @@
 <script src="https://use.fontawesome.com/b3a03bdfa0.js"></script>
 <script src="{{ URL::to('src/js/app.js') }}"></script>
 @yield('scripts')
-
+</body>
+</html>

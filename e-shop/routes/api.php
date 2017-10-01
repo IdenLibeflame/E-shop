@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Route::get('/search/', [
+//    'as' => 'search',
+//    'uses' => 'ProductController@search'
+//]);
+
+//Route::get('/search/{name}', 'ProductController@search')->name('query');

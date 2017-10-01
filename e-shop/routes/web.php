@@ -17,14 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/genre', 'GenreController@genre');
 
 
-Route::get('/genre/{name}/{id}', 'ProductController@product')->name('name');
+Route::get('/genre/{name}', 'ProductController@products')->name('name');
 
-Route::get('/genre/{name}/book/{book_id}', 'ProductController@book')->name('a', 'book_id');
+Route::get('/genre/{name}/book/{book_id}', 'ProductController@product')->name('book');
 
 Route::get('/reduce/{id}', 'BasketController@reduceByOne');
 
@@ -39,6 +39,27 @@ Route::get('/deletecomment/{comment_id}', [
    'uses' => 'CommentController@deleteComment',
     'as' => 'comment.delete'
 ]);
+
+Route::get('/search/', function () {
+    return view('search.index');
+});
+
+//Route::post('/search/result/', function ($query) {
+//    $results = App\Product::search($query)->get();
+//
+//    return view('search.result', compact('results'));
+//});
+
+//Route::get('/search', function () {
+//    return view('search.index');
+//});
+//
+Route::post('search/result', 'ProductController@search')->name('name');
+
+
+
+
+
 
 //Route::post('/edit', function (\Illuminate\Http\Request $request) {
 //   return response()->json(['message' => $request['commentId']]);

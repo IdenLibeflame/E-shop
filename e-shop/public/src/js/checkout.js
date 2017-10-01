@@ -15,7 +15,8 @@ $form.submit(function (event) {
         cvc: $('#card-cvc').val(),
         exp_month: $('#card-expiry-month').val(),
         exp_year: $('#card-expiry-year').val(),
-        name: $('#card-name').val()
+        name: $('#card-name').val(),
+        customer: $('#user-id').val()
     }, stripeResponseHandler);
     return false;
 });

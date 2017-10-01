@@ -98,19 +98,20 @@ class BasketController extends Controller
 
         Stripe::setApiKey('sk_test_oZVNrFVvcQ7W7MujpdSO9uCA');
         try {
-            $charge = Charge::create(array(
+            Charge::create(array(
                 "amount" => $basket->totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->input('stripeToken'), // obtained with Stripe.js
-                "description" => "Test Charge"
+                "description" => "Test Charge",
+                "customer" => auth()->id()
             ));
 
-            $order = new Order();
-            $order->basket = serialize($basket);
-            $order->address = $request->input('address');
-            $order->name = $request->input('name');
-            $order->payment_id = $charge->id;
-            Auth::user()->orders()->save($order);
+//            $order = new Order();
+//            $order->basket = serialize($basket);
+//            $order->address = $request->input('address');
+//            $order->name = $request->input('name');
+//            $order->payment_id = $charge->id;
+//            Auth::user()->orders()->save($order);
 
         } catch (\Exception $e) {
             return redirect()->route('checkout')->with('error', $e->getMessage());
