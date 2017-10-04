@@ -41,4 +41,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order');
     }
+
+    public static function createBySocialProvider($providerUser)
+    {
+        return self::create([
+            'email' => $providerUser->getEmail(),
+            'username' => $providerUser->getNickname(),
+            'name' => $providerUser->getName(),
+        ]);
+    }
 }

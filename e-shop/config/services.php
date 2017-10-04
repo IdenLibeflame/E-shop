@@ -35,4 +35,22 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => '1928739714058865',
+        'client_secret' => '743e00ec6ba1a2f70744f9deae496fba',
+        'redirect' => 'http://laratest.app/login/callback/facebook',
+    ],
+
+    'twitter' => [
+        'client_id' => 'Lfv18olUGdtYAKtu4WzKosKJV',
+        'client_secret' => 'xg1Q72hD2arHgsxtKwpqIdug1LorzzYdamk4437CDTSPCZFpLZ',
+        'redirect' => 'http://laratest.app/login/callback/twitter',
+    ],
+
+    'vkontakte' => [
+        'client_id' => '6207439',
+        'client_secret' => 'pR1eOFGG8EstJaeTS2ml',
+        'redirect' => 'http://laratest.app/login/callback/vkontakte',
+    ],
+
 ];
