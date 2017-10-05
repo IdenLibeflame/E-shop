@@ -35,10 +35,15 @@
             </a>
             <a href="/search" class="btn btn-warning">search</a>
             <a href="/genre" class="btn btn-warning">genre</a>
-            <a href="#" class="btn btn-warning">profile</a>
+
 
             @if (Route::has('login'))
                 @auth
+                <a href="#" class="btn btn-warning">profile</a>
+
+                @if(Auth::user()->isAdmin == 1)
+                    <a href="{{ route('admin/index') }}" class="btn btn-warning">Panel of Power!</a>
+                @endif
 
                 <a href="{{ route('logout') }}" class="btn btn-warning"
                    onclick="event.preventDefault();

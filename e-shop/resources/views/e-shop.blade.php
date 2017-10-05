@@ -46,10 +46,6 @@
                 <img src="https://www.e-reading.club/cover/1039/1039410.jpg" alt="...">
             </a>
         </div>
+    </div>
 
-
-        @endsection
-</div>
-
-</body>
-</html>
+@endsection

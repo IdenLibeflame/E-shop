@@ -19,6 +19,6 @@ class SocialAuthController extends Controller
 
         auth()->login($user);
 
-        return redirect()->to('http://laratest.app/');
+        return redirect()->to('/');
     }
 }

@@ -106,6 +106,4 @@
         var url = "{{ route('edit') }}";
         var urlLike = "{{ route('like') }}";
     </script>
-    @endsection
-    </body>
-    </html>
+@endsection

@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Middleware\isAdmin;
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('e-shop');
 });
@@ -91,10 +94,6 @@ Route::get('/add-to-basket/{id}', [
 
 Route::get('checkout', 'BasketController@getCheckout')->name('checkout');
 
-//Route::get('checkout',[
-//   'uses' => 'BasketController@getCheckout',
-//    'as' => 'checkout'
-//]);
 
 Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
 
@@ -103,3 +102,36 @@ Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
 //{
 //    $this->middleware('auth');
 //}
+
+
+Route::get('admin/index', function () {
+   return view('admin.index');
+})->name('admin/index')->middleware(isAdmin::class);
+
+
+Route::get('admin/showGenres', 'AdminController@showAllGenres')->middleware(isAdmin::class);
+
+//Route::get('admin/createGenre', 'AdminController@createGenre')->middleware(isAdmin::class);
+
+Route::get('admin/createGenre', function () {
+   return view('admin.createGenre');
+})->middleware(isAdmin::class);
+
+Route::post('admin/addGenre', 'AdminController@addGenre')->name('admin/addGenre')->middleware(isAdmin::class);
+
+Route::get('admin/deleteGenre/{genre_id}', 'AdminController@deleteGenre')->name('admin/deleteGenre')->middleware(isAdmin::class);
+
+Route::post('admin/{name}/editGenre{genre_id}', function (Request $request) {
+    return view('admin.updateGenre', compact('request'));
+})->middleware(isAdmin::class);
+
+
+Route::post('admin/{name}/updateGenre{genre_id}', 'AdminController@updateGenre')->middleware(isAdmin::class);
+
+//Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
+//    Route::get('users', function ()    {
+//        return view('admin.index');
+//    });
+//
+//});
+

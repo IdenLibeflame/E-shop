@@ -7,5 +7,4 @@
 
 </div>
 @endsection
-</body>
-</html>
+

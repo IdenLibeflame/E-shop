@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->float('price')->unsigned();
             $table->float('current_price')->unsigned()->nullable();
-            $table->integer('availability')->unsigned();
+            $table->boolean('availability')->unsigned();
             $table->float('discount')->unsigned()->nullable();
             $table->string('genre_name'); // заменить на foreign key
             $table->string('image');
