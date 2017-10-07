@@ -111,22 +111,25 @@ Route::get('admin/index', function () {
 
 Route::get('admin/showGenres', 'AdminController@showAllGenres')->middleware(isAdmin::class);
 
-//Route::get('admin/createGenre', 'AdminController@createGenre')->middleware(isAdmin::class);
+//Route::get('admin/createGenre', function () {
+//   return view('admin.createGenre');
+//})->middleware(isAdmin::class);
 
-Route::get('admin/createGenre', function () {
-   return view('admin.createGenre');
-})->middleware(isAdmin::class);
-
-Route::post('admin/addGenre', 'AdminController@addGenre')->name('admin/addGenre')->middleware(isAdmin::class);
-
-Route::get('admin/deleteGenre/{genre_id}', 'AdminController@deleteGenre')->name('admin/deleteGenre')->middleware(isAdmin::class);
-
-Route::post('admin/{name}/editGenre{genre_id}', function (Request $request) {
-    return view('admin.updateGenre', compact('request'));
-})->middleware(isAdmin::class);
+Route::get('admin/createGenre', 'AdminGenresController@createGenre')->middleware(isAdmin::class);
 
 
-Route::post('admin/{name}/updateGenre{genre_id}', 'AdminController@updateGenre')->middleware(isAdmin::class);
+Route::post('admin/addGenre', 'AdminGenresController@addGenre')->name('admin/addGenre')->middleware(isAdmin::class);
+
+Route::get('admin/deleteGenre/{genre_id}', 'AdminGenresController@deleteGenre')->name('admin/deleteGenre')->middleware(isAdmin::class);
+
+//Route::post('admin/{name}/editGenre{genre_id}', function (Request $request) {
+//    return view('admin.updateGenre', compact('request'));
+//})->middleware(isAdmin::class);
+
+Route::get('admin/editGenre/{genre_id}', 'AdminGenresController@editGenre')->name('admin/editGenre')->middleware(isAdmin::class);
+
+
+Route::post('admin/updateGenre', 'AdminGenresController@updateGenre')->name('admin/updateGenre')->middleware(isAdmin::class);
 
 //Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
 //    Route::get('users', function ()    {
