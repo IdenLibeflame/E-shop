@@ -14,7 +14,7 @@ class ProductController extends Controller
 
     public function products($name)
     {
-        $products = Product::where('genre_name', $name)->paginate(6);
+        $products = Product::where('genre_name', $name)->paginate(5);
 
         if ($products->count()) {
             return view('products', compact(['products', 'name']));

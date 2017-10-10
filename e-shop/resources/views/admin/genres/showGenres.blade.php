@@ -14,5 +14,7 @@
             @endforeach
 
     </ul>
+
+    {!! $genres->render() !!}
 @endsection
 

@@ -18,7 +18,7 @@
 
 
     <form action="/search/result" method="POST">
-        <input type="text" name="name" value="" required/>
+        <input type="text" name="query" value="" required/>
         <button type="submit">Submit</button>
         {!! csrf_field() !!}
     </form>

@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function showAllGenres()
+    public function index()
     {
-        $genres = Genre::all();
-
-        return view('admin.genres.showGenres', compact('genres'));
+        return view('admin.index');
     }
 }

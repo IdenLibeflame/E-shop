@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class AdminGenresController extends Controller
 {
+    public function showAllGenres()
+    {
+        $genres = Genre::paginate(2);
+
+        return view('admin.genres.showGenres', compact('genres'));
+    }
+
     public function createGenre()
     {
-        // Перенести 2 строчки ниже в код для создания нового товара
-//        $genresList = Genre::all('name');
-//        return view('admin.createGenre', compact('genresList'));
-
-
         return view('admin.genres.createGenre');
     }
 
@@ -47,7 +49,6 @@ class AdminGenresController extends Controller
     public function updateGenre(Request $request)
     {
         $genre = Genre::find($request->id);
-//dd($genre);
         $genre->name = $request->name;
         $genre->image = $request->image;
         $genre->update();

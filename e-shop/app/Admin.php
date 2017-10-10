@@ -20,4 +20,9 @@ class Admin extends Model
     {
         return $this->hasMany('App\Genre');
     }
+
+    public function products()
+    {
+        return $this->hasMany('App\Genre');
+    }
 }

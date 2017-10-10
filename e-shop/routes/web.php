@@ -103,38 +103,37 @@ Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
 //    $this->middleware('auth');
 //}
 
+// АДМИНКА
 
-Route::get('admin/index', function () {
-   return view('admin.index');
-})->name('admin/index')->middleware(isAdmin::class);
+Route::get('admin/index', 'AdminController@index')->name('admin/index')->middleware(isAdmin::class);
 
+// ЖАНРЫ
 
-Route::get('admin/showGenres', 'AdminController@showAllGenres')->middleware(isAdmin::class);
-
-//Route::get('admin/createGenre', function () {
-//   return view('admin.createGenre');
-//})->middleware(isAdmin::class);
+Route::get('admin/showGenres', 'AdminGenresController@showAllGenres')->middleware(isAdmin::class);
 
 Route::get('admin/createGenre', 'AdminGenresController@createGenre')->middleware(isAdmin::class);
-
 
 Route::post('admin/addGenre', 'AdminGenresController@addGenre')->name('admin/addGenre')->middleware(isAdmin::class);
 
 Route::get('admin/deleteGenre/{genre_id}', 'AdminGenresController@deleteGenre')->name('admin/deleteGenre')->middleware(isAdmin::class);
 
-//Route::post('admin/{name}/editGenre{genre_id}', function (Request $request) {
-//    return view('admin.updateGenre', compact('request'));
-//})->middleware(isAdmin::class);
-
 Route::get('admin/editGenre/{genre_id}', 'AdminGenresController@editGenre')->name('admin/editGenre')->middleware(isAdmin::class);
-
 
 Route::post('admin/updateGenre', 'AdminGenresController@updateGenre')->name('admin/updateGenre')->middleware(isAdmin::class);
 
-//Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
-//    Route::get('users', function ()    {
-//        return view('admin.index');
-//    });
-//
-//});
+// ПРОДУКТЫ
+
+Route::get('admin/showProducts', 'AdminProductsController@showAllProducts')->middleware(isAdmin::class);
+
+Route::get('admin/createProduct', 'AdminProductsController@createProduct')->middleware(isAdmin::class);
+
+Route::post('admin/addProduct', 'AdminProductsController@addProduct')->name('admin/addProduct')->middleware(isAdmin::class);
+
+Route::get('admin/deleteProduct/{product_id}', 'AdminProductsController@deleteProduct')->name('admin/deleteProduct')->middleware(isAdmin::class);
+
+Route::get('admin/editProduct/{product_id}', 'AdminProductsController@editProduct')->name('admin/editProduct')->middleware(isAdmin::class);
+
+Route::post('admin/updateProduct', 'AdminProductsController@updateProduct')->name('admin/updateProduct')->middleware(isAdmin::class);
+
+Route::post('admin/search/result', 'AdminProductsController@search')->name('query')->middleware(isAdmin::class);
 
