@@ -40,6 +40,7 @@
             @if (Route::has('login'))
                 @auth
                 <a href="#" class="btn btn-warning">profile</a>
+                <a href="{{ route('/feedback') }}" class="btn btn-warning">Contact us</a>
 
                 @if(Auth::user()->isAdmin == 1)
                     <a href="{{ route('admin/index') }}" class="btn btn-warning">Panel of Power!</a>

@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name', 64);
             $table->string('writer');
             $table->string('description');
-            $table->float('price')->unsigned();
-            $table->float('current_price')->unsigned()->nullable();
+            $table->float('price')->unsigned()->ceil();
+            $table->float('current_price')->unsigned()->nullable()->ceil();
             $table->boolean('availability')->unsigned();
             $table->float('discount')->unsigned()->nullable();
             $table->string('genre_name'); // заменить на foreign key

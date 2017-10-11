@@ -14,12 +14,14 @@ class ProductController extends Controller
 
     public function products($name)
     {
+        $products = null;
+
         $products = Product::where('genre_name', $name)->paginate(5);
 
         if ($products->count()) {
             return view('products', compact(['products', 'name']));
         } else {
-            return view("empty");
+            return view('products', compact(['products', 'name']));
         }
     }
 

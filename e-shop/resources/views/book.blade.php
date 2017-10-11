@@ -48,6 +48,9 @@
                             @foreach($book->comments as $comment)
                                             <article class="post" data-commentId="{{ $comment->id }}"><span>{{ $comment->comment}}</span>
 {{--                            <article class="post">{{ $commenTt->comment}}--}}
+                                                <br>
+                                                Posted by {{ $comment->user->name }}
+
                                         @if(Auth::user())
 
                                             <div class="interaction">
@@ -57,17 +60,21 @@
 
                                                 <br>
                                                 {{--<div class="info">--}}
-                                                    Posted by {{ $comment->user->name }}
+
                                                 {{--</div>--}}
                                             </div>
-                                        @endif
-                                        @if(Auth::user() == $comment->user)
+
+
+                                            @if(Auth::user()->isAdmin == 1)
+                                                 <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}">Delete</a>
+                                            @elseif(Auth::user() == $comment->user)
 
                                             <div class="test">
                                                 <a href="#" class="edit">Edit</a>
                                                 <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}">Delete</a>
                                             </div>
-
+                                                        <hr/>
+                                            @endif
                                         @endif
                                             </article>
                             @endforeach

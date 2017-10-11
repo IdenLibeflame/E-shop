@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/feedback', 'FeedbackController@index')->name('/feedback');
 
 Route::get('/genre', 'GenreController@genre');
 
