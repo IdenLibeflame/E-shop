@@ -61,8 +61,12 @@
             @endif
             {{--<a href="#" class="btn btn-warning">{{ $name }}</a>--}}
 
+
         </div>
     </div>
+    @if(Session::has('Success'))
+        <div class="alert alert-success" align="center"> {{ Session::get('Success') }}</div>
+    @endif
     @yield('content')
 
 

@@ -13,6 +13,7 @@
 
 use App\Http\Middleware\isAdmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('e-shop');
@@ -21,6 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/feedback', 'FeedbackController@index')->name('/feedback');
+
+Route::post('/sendFeedback', 'FeedbackController@sendFeedback')->name('sendFeedback');
+
 
 Route::get('/genre', 'GenreController@genre');
 
