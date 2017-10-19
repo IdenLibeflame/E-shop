@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('e-shop');
-});
+})->name('/');
 
 Auth::routes();
 
@@ -100,6 +100,8 @@ Route::get('checkout', 'BasketController@getCheckout')->name('checkout');
 
 
 Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
+
+
 
 // Это можно будет засунуть в контроллер вместо кода выше
 //public function __construct()

@@ -136,7 +136,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array(
 
         /*
          * Laravel Framework Service Providers...
@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
 //        Laravel\Socialite\SocialiteServiceProvider::class,
 
 
@@ -182,7 +183,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
 
-    ],
+
+    ),
 
     /*
     |--------------------------------------------------------------------------

@@ -50,7 +50,21 @@
 
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <a href="{{ route('checkout') }}" type="button" class="btn btn-success">Checkout</a>
+            {{--<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">--}}
+                {{--<a href="{{ route('checkout') }}" type="button" class="btn btn-success">Checkout</a>--}}
+            {{--</div>--}}
+                <form action="{{ route('checkout') }}" method="POST">
+                    {{ csrf_field() }}
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="{{ config('services.stripe.key') }}"
+                            data-amount="{{ $totalPrice * 100 }}"
+                            data-name="Demo Site"
+                            data-description="Widget"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto">
+                    </script>
+                </form>
             </div>
         </div>
     @else
@@ -62,8 +76,7 @@
     @endif
 @endsection
 
-{{--@section('scripts')--}}
-    {{--<script src="https://js.stripe.com/v3/"></script>--}}
-    {{--<script src="{{ URL::to('src/js/checkout.js') }}"></script>--}}
-{{--@endsection--}}
+@section('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+@endsection
 

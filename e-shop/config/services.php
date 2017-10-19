@@ -42,8 +42,8 @@ return [
     ],
 
     'twitter' => [
-        'client_id' => 'Lfv18olUGdtYAKtu4WzKosKJV',
-        'client_secret' => 'xg1Q72hD2arHgsxtKwpqIdug1LorzzYdamk4437CDTSPCZFpLZ',
+        'client_id' => 'AAVUN5ufjfQ2zq81JCVHQU1yq',
+        'client_secret' => 'evKUkdDZv1dIZv3qfM9aIXsXfIdLP3Rz0jx6ElUhK0Mdrgv755',
         'redirect' => 'http://laratest.app/login/callback/twitter',
     ],
 
