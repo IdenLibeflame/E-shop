@@ -54,10 +54,13 @@
                                         @if(Auth::user())
 
                                             <div class="interaction">
-                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->like == 1 ? 'You like this comment' : 'Like' : 'Like' }}</a>
-                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->like == 0 ? 'You don\'t like this comment' : 'Dislike' : 'Dislike' }}</a>
-                                                total
-
+                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->rating == 1 ? 'You like this comment' : 'Like' : 'Like' }}</a>
+                                                <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->rating == 0 ? 'You don\'t like this comment' : 'Dislike' : 'Dislike' }}</a>
+                                                @foreach($ratings as $id => $rating )
+                                                    @if($comment->id == $id)
+                                                        <p id="rating">Reputation {{ $rating }}</p>
+                                                    @endif
+                                                @endforeach
                                                 <br>
                                                 {{--<div class="info">--}}
 

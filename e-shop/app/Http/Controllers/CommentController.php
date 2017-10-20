@@ -57,7 +57,6 @@ class CommentController extends Controller
         $comment->update();
 
         return response()->json(['new_comment' => $comment->comment], 200);
-//        return Response::json(['new_comment' => $comment->comment], 200);
     }
 
     public function likeComment(Request $request)
@@ -76,7 +75,7 @@ class CommentController extends Controller
         if ($like) {
             // Получаем значение поля "лайк", хранящееся в базе
             // (если он есть для этого коммента от этого юзера)
-            $already_like = $like->like;
+            $already_like = $like->rating;
             $update = true;
             if ($already_like == $is_like) {
                 // Если значение поля "лайк" в базе равно значению,
@@ -88,7 +87,7 @@ class CommentController extends Controller
             $like = new Like();
         }
 
-        $like->like = $is_like;
+        $like->rating = $is_like;
         $like->user_id = $user->id;
         $like->comment_id = $comment_id;
 

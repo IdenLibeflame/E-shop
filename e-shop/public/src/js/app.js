@@ -52,3 +52,8 @@ $('.like').on('click', function (event) {
             }
         });
 });
+
+//
+// $(document).ready(function() {
+//     $('#rating').
+// };

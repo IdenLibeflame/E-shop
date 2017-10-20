@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Genre;
+use App\Like;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,13 +38,14 @@ class ProductController extends Controller
             abort(404);
         }
 
-//        $comments = $book->comments;
-
-
+        $allComments = Product::find(1)->comments->where('product_id', $id);
+//        dd($allComments[1]->comment);
+        $ratings = Like::showRating($allComments);
+//        dd($rating);
 //        $book = Product::where('id', $id)->get();
 
 
-        return view('book', compact('book', 'comments'));
+        return view('book', compact('book', 'comments', 'ratings'));
 //        return view('book', compact(['book', 'productComments', 'nameOfWriterComment', 'count']));
 
     }
