@@ -33,6 +33,7 @@ class SocialAccountService
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName(),
                     'password' => bcrypt(str_random()),
+//                    'address' => null,
                 ]);
             }
 

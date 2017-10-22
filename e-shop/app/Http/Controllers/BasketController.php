@@ -106,11 +106,22 @@ class BasketController extends Controller
             'source' => request('stripeToken')
         ]);
 
-        Charge::create([
+        $charge = Charge::create([
             'customer' => $customer->id,
             'amount' => $basket->totalPrice * 100,
             'currency' => 'usd'
         ]);
+
+
+        $order = new Order();
+        $order->user_id = auth()->id();
+        $order->name = Auth::user()->name;
+        $order->email = Auth::user()->email;
+        $order->address = Auth::user()->address;
+        $order->basket = serialize($basket);
+        $order->payment_id = $charge->id;
+
+        Auth::user()->orders()->save($order);
 
         Session::forget('basket');
         Session::flash('Success' ,'Payment was successful!');

@@ -59,8 +59,8 @@
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="{{ config('services.stripe.key') }}"
                             data-amount="{{ $totalPrice * 100 }}"
-                            data-name="Demo Site"
-                            data-description="Widget"
+                            data-name="Buy from e-shop"
+                            data-description="Payment"
                             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                             data-locale="auto">
                     </script>

@@ -39,7 +39,7 @@
 
             @if (Route::has('login'))
                 @auth
-                <a href="#" class="btn btn-warning">profile</a>
+                <a href="{{ route('/profile') }}" class="btn btn-warning">profile</a>
                 <a href="{{ route('/feedback') }}" class="btn btn-warning">Contact us</a>
 
                 @if(Auth::user()->isAdmin == 1)

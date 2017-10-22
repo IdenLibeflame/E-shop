@@ -85,9 +85,7 @@ Route::post('/like', [
     'as' => 'like'
 ]);
 
-Route::get('profile', function () {
-    // Только аутентифицированные пользователи могут зайти...
-})->middleware('auth');
+Route::get('/profile', 'ProfileController@index')->name('/profile')->middleware('auth');
 
 Route::get('/basket', 'BasketController@getBasket');
 
