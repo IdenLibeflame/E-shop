@@ -26,7 +26,7 @@
                         <a href="{{ route('basket.addToBasket', ['id' => $book->id]) }}" class="btn btn-warning">Add to basket</a>
                     </div>
                 </ul>
-
+                @if(Auth::user() && Auth::user()->isAdmin == 0)
                 <section class="row new-post">
                     <div class="col-md-6 col-md-offset-3">
                         <form action="{{ route('comment.create') }}" method="post">
@@ -41,6 +41,7 @@
                         </form>
                     </div>
                 </section>
+                @endif
             </div>
                 <section class="row">
                     <div class="col-md-6 col-md-offset-3">

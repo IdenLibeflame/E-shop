@@ -5,7 +5,7 @@ $('.edit').on('click', function (event) {
     event.preventDefault();
 
     commentTextElement = event.target.parentNode.parentNode;
-    console.log(commentTextElement);
+    // console.log(commentTextElement);
 
     var commentText = commentTextElement.childNodes[0].textContent;
     commentId = event.target.parentNode.parentNode.dataset['commentid'];

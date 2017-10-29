@@ -12,10 +12,11 @@ class FeedbackShipped extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $data
      */
     public function __construct($data)
     {
