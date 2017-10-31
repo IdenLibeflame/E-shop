@@ -19,7 +19,7 @@
                     <p>{{ $product->description }}</p>
                     <p>
                         <div class="pull-left price">{{ $product->current_price }}</div>
-                        <a href="{{ route('basket.addToBasket', ['id' => $product->id]) }}" class="btn btn-primary" role="button">Add to Cart</a>
+                        <a href="{{ route('basket.addToBasket', ['id' => $product->id]) }}" class="btn btn-primary" role="button">Add to Basket</a>
                         <a href="{{ route('book', [$name, $product->id]) }}" class="btn btn-default pull-right" role="button">More info</a>
                     </p>
                 </div>

@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->text('basket');
             $table->string('payment_id');
+            $table->boolean('status')->default(0);
         });
     }
 

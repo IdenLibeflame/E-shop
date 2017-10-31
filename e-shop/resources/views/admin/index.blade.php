@@ -6,5 +6,7 @@
     <a href="showGenres">Show Genres</a>
     <br>
     <a href="showProducts">Show Products</a>
+    <br>
+    <a href="showOrders">Show Orders</a>
 @endsection
 

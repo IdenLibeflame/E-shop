@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\Events\OrderShipped;
 use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Stripe\Customer;
 use Stripe\Error\Card;
@@ -121,7 +123,9 @@ class BasketController extends Controller
         $order->basket = serialize($basket);
         $order->payment_id = $charge->id;
 
-        Auth::user()->orders()->save($order);
+        $newOrder = Auth::user()->orders()->save($order);
+
+        event(new OrderShipped($newOrder->id));
 
         Session::forget('basket');
         Session::flash('Success' ,'Payment was successful!');

@@ -23,7 +23,7 @@
 
 
                     <div class="btn-group btn-group-justified" style="height: 30px; width: 150px">
-                        <a href="{{ route('basket.addToBasket', ['id' => $book->id]) }}" class="btn btn-warning">Add to basket</a>
+                        <a href="{{ route('basket.addToBasket', ['id' => $book->id]) }}" class="btn btn-warning">Add to Basket</a>
                     </div>
                 </ul>
                 @if(Auth::user() && Auth::user()->isAdmin == 0)

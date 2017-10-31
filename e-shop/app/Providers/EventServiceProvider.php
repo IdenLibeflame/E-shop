@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
             // add your listeners (aka providers) here
             'SocialiteProviders\VKontakte\VKontakteExtendSocialite@handle',
         ],
+        'App\Events\OrderShipped' => [
+            'App\Listeners\OrderShippedListener',
+        ],
     ];
 
     /**

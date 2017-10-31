@@ -52,7 +52,6 @@ class AdminProductsController extends Controller
     public function updateProduct(Request $request)
     {
         $product = Product::find($request->id);
-//dd($genre);
         $product->name = $request->name;
         $product->writer = $request->writer;
         $product->description = $request->description;

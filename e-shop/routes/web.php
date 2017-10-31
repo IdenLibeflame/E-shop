@@ -141,3 +141,14 @@ Route::post('admin/updateProduct', 'AdminProductsController@updateProduct')->nam
 
 Route::post('admin/search/result', 'AdminProductsController@search')->name('query')->middleware(isAdmin::class);
 
+// ЗАКАЗЫ
+
+Route::get('admin/showOrders', 'AdminOrderController@showAllOrders')->middleware(isAdmin::class);
+
+Route::get('admin/showOrder/{order_id}', 'AdminOrderController@showOrder')->name('admin/showOrder')->middleware(isAdmin::class);
+
+Route::post('admin/processingOrder', 'AdminOrderController@processingOrder')->name('admin/processingOrder')->middleware(isAdmin::class);
+
+Route::get('admin/processedOrders', 'AdminOrderController@processedOrders')->name('admin/processedOrders')->middleware(isAdmin::class);
+
+Route::get('admin/unprocessedOrders', 'AdminOrderController@unprocessedOrders')->name('admin/unprocessedOrders')->middleware(isAdmin::class);
