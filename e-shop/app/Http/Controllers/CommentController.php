@@ -63,7 +63,7 @@ class CommentController extends Controller
     {
         $comment_id = $request['commentId'];
         $is_like = $request['isLike'] === 'true';
-        $update = false;
+//        $update = false;
         $comment = Comment::find($comment_id);
         if (!$comment) {
             return null;
@@ -76,12 +76,13 @@ class CommentController extends Controller
             // Получаем значение поля "лайк", хранящееся в базе
             // (если он есть для этого коммента от этого юзера)
             $already_like = $like->rating;
-            $update = true;
+//            $update = true;
             if ($already_like == $is_like) {
                 // Если значение поля "лайк" в базе равно значению,
                 // Переданному через форму - удаляем его (снимаем лайк)
                 $like->delete();
-                return null;
+
+                return response()->json(['rating' => $comment->rating()], 200);
             }
         } else {
             $like = new Like();
@@ -91,12 +92,29 @@ class CommentController extends Controller
         $like->user_id = $user->id;
         $like->comment_id = $comment_id;
 
-        if ($update) {
-            $like->update();
-        } else {
-            $like->save();
-        }
+        $like->save();
 
-        return null;
+//        if ($update) {
+//            $like->update();
+//        } else {
+//            $like->save();
+//        }
+
+        return response()->json(['rating' => $comment->rating()], 200);
+//        return $rating;
     }
+
+//    public function ratingComment(Request $request)
+//    {
+//        $comment_id = $request['commentId'];
+//
+//        $rating = Like::showRating($comment_id);
+//
+//        if (!$rating) {
+//            return null;
+//        }
+//
+////        return response()->json(['new_rating' => $rating], 200);
+//        return $rating;
+//    }
 }

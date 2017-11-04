@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Genre;
 use App\Like;
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,10 +39,10 @@ class ProductController extends Controller
             abort(404);
         }
 
-        $allComments = Product::find(1)->comments->where('product_id', $id);
+        $allComments = Product::find($id)->comments;
 //        dd($allComments[1]->comment);
         $ratings = Like::showRating($allComments);
-//        dd($rating);
+//        dd($ratings);
 //        $book = Product::where('id', $id)->get();
 
 
@@ -59,5 +60,23 @@ class ProductController extends Controller
 
         return back()->with('results', $results);
     }
+
+//    public function bestsellers()
+//    {
+//        $bestsellers = Order::all();
+//
+////        dd($bestsellers);
+//
+//        $bestsellers = Order::orderBy('basket', 'desc')->take(3)->get();
+//
+//        $bestsellers->transform(function ($order, $key) {
+//            $order->basket = unserialize($order->basket);
+//            return $order;
+//        });
+//
+////        dd($bestsellers[0]->basket);
+//
+//        return view('e-shop', compact('bestsellers'));
+//    }
 }
 

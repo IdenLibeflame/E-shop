@@ -23,7 +23,12 @@ class Product extends Model
 
     public function getCurrentPriceAttribute()
     {
-        return $this->discount > 0 ? $this->price - $this->price * $this->discount : $this->price;
+        if ($this->discount > 0) {
+            return $current_price = $this->price - $this->price * $this->discount;
+        } else {
+            return $current_price = $this->price;
+        }
+//        return $this->discount > 0 ? $this->price - $this->price * $this->discount : $this->price;
 
     }
 }

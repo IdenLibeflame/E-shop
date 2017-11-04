@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('e-shop');
 })->name('/');
 
+//Route::get('/', 'ProductController@bestsellers')->name('/');
+
 Auth::routes();
 
 Route::get('/feedback', 'FeedbackController@index')->name('/feedback');
@@ -83,6 +85,11 @@ Route::post('/edit', [
 Route::post('/like', [
     'uses' => 'CommentController@likeComment',
     'as' => 'like'
+]);
+
+Route::post('/rating', [
+    'uses' => 'CommentController@ratingComment',
+    'as' => 'rating'
 ]);
 
 Route::get('/profile', 'ProfileController@index')->name('/profile')->middleware('auth');

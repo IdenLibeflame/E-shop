@@ -81,20 +81,22 @@ class BasketController extends Controller
 
     }
 
-    public function getCheckout()
-    {
-        if (!Session::has('basket')) {
-            return view('basket.index');
-        }
-
-        $oldBasket = Session::get('basket');
-        $basket = new Basket($oldBasket);
-        $total = $basket->totalPrice;
-        return view('basket.checkout', compact('total'));
-    }
+//    public function getCheckout()
+//    {
+//        if (!Session::has('basket')) {
+//            return view('basket.index');
+//        }
+//
+//        $oldBasket = Session::get('basket');
+//        $basket = new Basket($oldBasket);
+//        $total = $basket->totalPrice;
+//        return view('basket.checkout', compact('total'));
+//    }
 
     public function postCheckout()
     {
+
+
         if (!Session::has('basket')) {
             return redirect()->route('basket.index');
         }

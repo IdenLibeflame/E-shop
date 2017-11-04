@@ -59,7 +59,7 @@
                                                 <a href="#" class="like">{{ Auth::user()->likes()->where('comment_id', $comment->id)->first() ? Auth::user()->likes()->where('comment_id', $comment->id)->first()->rating == 0 ? 'You don\'t like this comment' : 'Dislike' : 'Dislike' }}</a>
                                                 @foreach($ratings as $id => $rating )
                                                     @if($comment->id == $id)
-                                                        <p id="rating">Reputation {{ $rating }}</p>
+                                                        <p>Rating <span class="rating" id="rating-{{ $id }}">{{ $rating }}</span></p>
                                                     @endif
                                                 @endforeach
                                                 <br>
@@ -114,7 +114,9 @@
 
     <script>
         var token = "{{ Session::token() }}";
+        var rating = "{{ $rating }}"
         var url = "{{ route('edit') }}";
         var urlLike = "{{ route('like') }}";
+        var urlRating = "{{ route('rating') }}";
     </script>
 @endsection

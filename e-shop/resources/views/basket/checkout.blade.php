@@ -68,6 +68,9 @@
         {{--</div>--}}
     {{--</div>--}}
 
+
+            @if(Auth::user)
+
             <form action="{{ route('checkout') }}" method="POST">
                 {{ csrf_field() }}
                 <script
@@ -80,6 +83,9 @@
                         data-locale="auto">
                 </script>
             </form>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+            @endif
 
 @endsection
 

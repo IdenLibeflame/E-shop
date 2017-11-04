@@ -43,8 +43,39 @@ $('.like').on('click', function (event) {
         url: urlLike,
         data: {isLike: isLike, commentId: commentId, _token: token}
     })
-        .done(function () {
-            event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this comment' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this comment' : 'Dislike';
+        .done(function (response) {
+            // event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this comment' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this comment' : 'Dislike';
+
+            // response = JSON.parse(response);
+
+            $('#rating-' + commentId).html(response.rating);
+
+            if (isLike) {
+                event.target.innerText == 'Like';
+                if (event.target.innerText == 'Like') {
+                    event.target.innerText = 'You like this comment';
+                } else {
+                    event.target.innerText = 'Like';
+                }
+            } else {
+                event.target.innerText == 'Dislike';
+                if (event.target.innerText == 'Dislike') {
+                    event.target.innerText = 'You don\'t like this comment';
+                } else {
+                    event.target.innerText = 'Dislike';
+
+                }
+            }
+            // $('.rating').html(function (i, rating) {
+            //     return rating * 1 + 1;
+            // });
+
+            // $('.rating').html(function (i, rating) {
+            //     return rating * 1 - 1;
+            // });
+
+            // $('.rating').html(rating);
+
             if (isLike) {
                 event.target.nextElementSibling.innerText = 'Dislike';
             } else {
@@ -53,7 +84,21 @@ $('.like').on('click', function (event) {
         });
 });
 
+
+// $(document).ready(function(event) {
+//     // event.preventDefault();
+//     commentId = event.target.parentNode.parentNode.dataset['commentid'];
 //
-// $(document).ready(function() {
-//     $('#rating').
-// };
+//     $.ajax({
+//         method: 'POST',
+//         url: urlLike,
+//         data: {commentId: commentId, _token: token, rating: rating},
+//         success: function(rating){ // в случае удачного завершения запроса к серверу
+//             // в переменной data - ответ сервера
+//             if(rating){
+//                 $('.rating').html(rating); // выводим статью в нужный блок
+//             }
+//         }
+//     })
+// });
+
