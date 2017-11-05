@@ -8,6 +8,17 @@
         <p>{{ $order[0]->email }}</p>
         <p>{{ $order[0]->address }}</p>
 
+        {{--@foreach($order[0]->address as $item)--}}
+            {{--<ul>--}}
+                {{--<p>{{ $item }}</p>--}}
+                {{--<li>{{ $item['price'] }} $</li>--}}
+                {{--{{ $item['item']['name'] }} | {{$item['qty']}}--}}
+                {{--<ul>--}}
+                    {{--<li>Total Price: {{ $order[0]->basket->totalPrice }}</li>--}}
+                {{--</ul>--}}
+            {{--</ul>--}}
+        {{--@endforeach--}}
+
         @foreach($order[0]->basket->items as $item)
             <ul>
 

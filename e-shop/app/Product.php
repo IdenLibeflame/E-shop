@@ -9,6 +9,10 @@ class Product extends Model
 {
     use Searchable;
 
+//    protected $fillable = [
+//      'current_price'
+//    ];
+
     public function comments()
     {
         return $this->hasMany('App\Comment');

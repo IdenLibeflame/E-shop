@@ -103,25 +103,54 @@ class BasketController extends Controller
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
 
+//        dd($basket);
+
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $customer = Customer::create([
-           'email' => request('stripeEmail'),
-            'source' => request('stripeToken')
-        ]);
+//        dd(request());
 
-        $charge = Charge::create([
-            'customer' => $customer->id,
-            'amount' => $basket->totalPrice * 100,
-            'currency' => 'usd'
-        ]);
+        try {
+            $customer = Customer::create([
+                'email' => request('stripeEmail'),
+                'source' => request('stripeToken'),
+//                'address' => request('shippingAddress'),
+            ]);
+
+            $charge = Charge::create([
+                'customer' => $customer->id,
+                'amount' => $basket->totalPrice * 100,
+                'currency' => 'usd'
+            ]);
+
+//            $address = [
+//                'country' => request('shipping_address_country'),
+////                'zip' => request('shipping_address_zip'),
+//                'state' => request('shipping_address_state'),
+//                'line1' => request('shipping_address_line1'),
+//                'city' => request('shipping_address_city'),
+////                'country_code' => request('shipping_address_country_code')
+//            ];
+//
+//            $shippingDetails = [
+//                'name' => request('shipping_name'),
+//                'address' => $address
+//            ];
+//
+//            $charge->shipping = $shippingDetails;
+//            $charge->save();
+
+        } catch (\Exception $e) {
+//            return back()->withErrors(['payment' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
+//            return response()->json(['status' => $e->getMessage()], 422);
+        }
 
 
         $order = new Order();
         $order->user_id = auth()->id();
         $order->name = Auth::user()->name;
         $order->email = Auth::user()->email;
-        $order->address = Auth::user()->address;
+        $order->address = request('shipping_address_country'). ' ' .request('shipping_address_city'). ' ' .request('shipping_address_line1');
         $order->basket = serialize($basket);
         $order->payment_id = $charge->id;
 

@@ -45,7 +45,7 @@ class AdminProductsController extends Controller
         $genresList = Genre::all('name');
 
         $product = Product::find($product_id);
-        dd($product->current_price);
+//        dd($product->current_price);
 
         return view('admin.products.editProduct', compact('product', 'genresList'));
     }

@@ -36,6 +36,7 @@ class AdminOrderController extends Controller
             $order->basket = unserialize($order->basket);
             return $order;
         });
+
 //        dd($order);
 
         return view('admin.orders.processingOrder', compact('order'));
@@ -55,5 +56,6 @@ class AdminOrderController extends Controller
         $order->update();
 
         return redirect()->to('admin/showOrders');
+
     }
 }

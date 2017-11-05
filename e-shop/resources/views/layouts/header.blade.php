@@ -16,6 +16,12 @@
 
     <!-- Styles -->
 
+    <script>
+        window.eShop = <?php echo json_encode([
+            'user' => auth()->user()
+        ]);?>
+    </script>
+
     <link rel="stylesheet" href="{{ URL::to('\src\img\img.css') }}">
     @yield('styles')
 </head>
