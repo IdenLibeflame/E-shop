@@ -19,9 +19,14 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->string('name');
             $table->string('email');
-            $table->string('address');
+            $table->string('country');
+            $table->string('country_code');
+            $table->string('city');
+            $table->string('street');
+            $table->integer('zip_code');
             $table->text('basket');
             $table->string('payment_id');
+            $table->string('customer_id');
             $table->boolean('status')->default(0);
         });
     }
@@ -36,3 +41,4 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+

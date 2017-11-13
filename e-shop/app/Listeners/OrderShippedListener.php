@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\OrderShipped;
 use App\Order;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
@@ -34,6 +32,8 @@ class OrderShippedListener
             $order->basket = unserialize($order->basket);
             return $order;
         });
+
+//        dispatch(new SendEmail($orderData));
 //        $orderData = [
 //            'name' => $order->name,
 //            'email' => $order->email,
@@ -42,7 +42,6 @@ class OrderShippedListener
 //        ];
 //        dd($orderData[0]->email);
         Mail::to($orderData[0]->email)->send(new \App\Mail\OrderShipped($orderData));
-
 
     }
 }

@@ -17,7 +17,7 @@
                 </div>
             </div>
         @endif
-
+        <br>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
                 <ul class="list-group">
@@ -44,14 +44,20 @@
 
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <strong>Total: {{ $totalPrice }}</strong>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Total price: {{ $totalPrice }}</strong>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <hr>
+        {{--<hr>--}}
 
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+
+                @if(auth()->user())
 
                 <form action="{{ route('checkout') }}" method="POST" id="checkout-form">
                     {{ csrf_field() }}
@@ -73,9 +79,12 @@
                     <input type="hidden" name="shipping_address_country" id="shipping_address_country">
                     <input type="hidden" name="shipping_address_country_code" id="shipping_address_country_code">
 
-                    <button type="submit" id="button">Buy</button>
+                    <button type="submit" id="button" class="btn btn-primary">Buy</button>
                     {{--<p class="help in-danger" v-show="status" v-text="status"></p>--}}
                 </form>
+                @else
+                    <p class="alert alert-danger">You have to Login or Register for payment</p>
+                @endif
 
                 <script src="https://checkout.stripe.com/checkout.js"></script>
                 <script>
@@ -147,9 +156,9 @@
             </div>
         </div>
     @else
-        <div class="row">
+        <div class="row alert alert-danger">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <h2>No Items in Basket</h2>
+                <h2 align="center">No Items in Basket</h2>
             </div>
         </div>
     @endif

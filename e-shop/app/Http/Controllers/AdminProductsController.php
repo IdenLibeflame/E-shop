@@ -24,20 +24,27 @@ class AdminProductsController extends Controller
 
     public function addProduct(Request $request)
     {
-        $product = new Product();
-        $product->name = $request->name;
-        $product->writer = $request->writer;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->current_price = $request->current_price;
-        $product->availability = $request->availability;
-        $product->discount = $request->discount;
-        $product->genre_name = $request->genre_name;
-        $product->image = $request->image;
+            $pathToAttach = '/public/src/productImage/';
+            $file = $request->file('image');
+            $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
 
-        $product->save();
+            $file->move(public_path().$pathToAttach, $filename);
 
-        return redirect()->to('admin/showProducts');
+            $product = new Product();
+            $product->name = $request->name;
+            $product->writer = $request->writer;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->current_price = $request->current_price;
+            $product->availability = $request->availability;
+            $product->discount = $request->discount;
+            $product->genre_name = $request->genre_name;
+            $product->image = '/public/src/productImage/'.$filename;
+
+            $product->save();
+
+            return redirect()->to('admin/showProducts');
+
     }
 
     public function editProduct($product_id)
@@ -52,6 +59,13 @@ class AdminProductsController extends Controller
 
     public function updateProduct(Request $request)
     {
+//        dd($request);
+        $pathToAttach = '/public/src/productImage/';
+        $file = $request->file('image');
+        $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
+
+        $file->move(public_path().$pathToAttach, $filename);
+
         $product = Product::find($request->id);
         $product->name = $request->name;
         $product->writer = $request->writer;
@@ -61,7 +75,7 @@ class AdminProductsController extends Controller
         $product->availability = $request->availability;
         $product->discount = $request->discount;
         $product->genre_name = $request->genre_name;
-        $product->image = $request->image;
+        $product->image = '/public/src/productImage/'.$filename;
         $product->update();
 
         return redirect()->to('admin/showProducts');
@@ -82,8 +96,9 @@ class AdminProductsController extends Controller
 
         $query = request()->input('query');
 
-        $results = Product::search($query)->get();
+        $results = Product::search($query)->paginate(1);
 
-        return back()->with('results', $results);
+//        return back()->with('results', $results);
+        return view('admin.products.showProducts', compact('results'));
     }
 }

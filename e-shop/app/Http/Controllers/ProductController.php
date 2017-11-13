@@ -54,29 +54,33 @@ class ProductController extends Controller
     public function search()
     {
 
-        $name = request()->input('name');
+        $query = request()->input('query');
 
-        $results = Product::search($name)->get();
+        $results = Product::search($query)->paginate(1);
 
-        return back()->with('results', $results);
+//        return back()->with('results', $results);
+
+        return view('search.index', compact('results'));
     }
 
-//    public function bestsellers()
-//    {
-//        $bestsellers = Order::all();
-//
-////        dd($bestsellers);
-//
+    public function newBooks()
+    {
+//        $newBooks = Product::orderBy('created_at', 'desc')->take(3)->get();
+        $newBooks = Product::orderBy('created_at', 'desc')->paginate(6);
+
+//        dd($newBooks);
+
+
 //        $bestsellers = Order::orderBy('basket', 'desc')->take(3)->get();
 //
 //        $bestsellers->transform(function ($order, $key) {
 //            $order->basket = unserialize($order->basket);
 //            return $order;
 //        });
-//
-////        dd($bestsellers[0]->basket);
-//
-//        return view('e-shop', compact('bestsellers'));
-//    }
+
+//        dd($bestsellers[0]->basket);
+
+        return view('e-shop', compact('newBooks'));
+    }
 }
 

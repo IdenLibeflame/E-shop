@@ -9,6 +9,7 @@ $('.edit').on('click', function (event) {
 
     var commentText = commentTextElement.childNodes[0].textContent;
     commentId = event.target.parentNode.parentNode.dataset['commentid'];
+    console.log(commentText);
 
     $('#comment').val(commentText);
 
@@ -27,7 +28,7 @@ $('.edit').on('click', function (event) {
         })
             .done(function (msg) {
 
-                $(commentTextElement).find('span').text(msg['new_comment']);
+                $(commentTextElement).find('#span_comment').text(msg['new_comment']);
                 $('#edit-modal').modal('hide');
             });
     });

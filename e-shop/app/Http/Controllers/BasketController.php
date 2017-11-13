@@ -150,13 +150,20 @@ class BasketController extends Controller
         $order->user_id = auth()->id();
         $order->name = Auth::user()->name;
         $order->email = Auth::user()->email;
-        $order->address = request('shipping_address_country'). ' ' .request('shipping_address_city'). ' ' .request('shipping_address_line1');
+        $order->country = request('shipping_address_country');
+        $order->country_code = request('shipping_address_country_code');
+        $order->city = request('shipping_address_city');
+        $order->street = request('shipping_address_line1');
+        $order->zip_code = request('shipping_address_zip');
         $order->basket = serialize($basket);
         $order->payment_id = $charge->id;
+        $order->customer_id = $charge->customer;
 
         $newOrder = Auth::user()->orders()->save($order);
 
         event(new OrderShipped($newOrder->id));
+//        dispatch(new SendEmail($newOrder->id));
+//        SendEmail::dispatch($newOrder);
 
         Session::forget('basket');
         Session::flash('Success' ,'Payment was successful!');

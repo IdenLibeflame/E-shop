@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
-    <form action="{{ route('admin/updateProduct') }}" method="post">
+    <form action="{{ route('admin/updateProduct') }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{ $product->id }}">
 
         <p>Current name: <input type="text" name="name" value="{{ $product->name }}"></p>
@@ -19,22 +19,30 @@
         <br>
         <p>Current discount: <input type="text" name="discount" value="{{ $product->discount }}"></p>
         <br>
-        <p>Current availability: {{ $product->availability }}</p>
-            <div>
-                <p>In stock?</p>
-                <p> Yes <input type="radio" name="availability" value="1"> </p>
-                <p> No <input type="radio" name="availability" value="0"> </p>
-            </div>
+        @if($product->availability)
+            <p>Current availability: In stock</p>
+        @else
+            <p>Current availability: Absent</p>
+        <br>
+        @endif
+        <select name="availability">
+            <option value="1">Present</option>
+            <option value="0"> Absent </option>
+        </select>
         <br>
         <p>Current genre: {{ $product->genre_name }}</p>
-        @foreach($genresList as $genre)
-            <p> {{ $genre->name }} <input type="checkbox" name="genre_name" value="{{ $genre->name }}"> </p>
-        @endforeach
+        <select name="genre_name">
+            @foreach($genresList as $genre)
+                {{--<p> {{ $genre->name }} <input type="checkbox" name="genre_name" value="{{ $genre->name }}"> </p>--}}
+                <option value="{{ $genre->name }}">{{ $genre->name }}</option>
+            @endforeach
+        </select>
         <br>
         <img src="{{ $product->image }}" alt="" style="max-height: 250px">
         <br>
         <p>Current image address: {{ $product->image }}</p>
-        <input type="text" name="image" value="{{ $product->image }}">
+        <input type="file" name="image" value="{{ $product->image }}" required>
+        <br>
         <button type="submit" class="btn btn-primary">Update product</button>
         {!! csrf_field() !!}
     </form>

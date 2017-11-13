@@ -23,6 +23,11 @@ class Product extends Model
         return $this->belongsTo('App\Genre');
     }
 
+    public function searchableAs()
+    {
+        return 'name';
+    }
+
     // Мутатор
 
     public function getCurrentPriceAttribute()

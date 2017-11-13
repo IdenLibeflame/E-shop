@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "806a0f9e18f58fc859afcdc41ea34286",
+    "content-hash": "2093d23f76356bf75b895bd44f614156",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "1.20.0",
+            "version": "1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "3daee8d55c1d84eff227fd99054e78ddc196f309"
+                "reference": "3f0a012c88d69f3b092edaf9e6a8d69699d55dfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/3daee8d55c1d84eff227fd99054e78ddc196f309",
-                "reference": "3daee8d55c1d84eff227fd99054e78ddc196f309",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/3f0a012c88d69f3b092edaf9e6a8d69699d55dfc",
+                "reference": "3f0a012c88d69f3b092edaf9e6a8d69699d55dfc",
                 "shasum": ""
             },
             "require": {
@@ -31,8 +31,7 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "AlgoliaSearch": "src/",
-                    "AlgoliaSearch\\Tests": "tests/"
+                    "AlgoliaSearch": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -55,7 +54,7 @@
             ],
             "description": "Algolia Search API Client for PHP",
             "homepage": "https://github.com/algolia/algoliasearch-client-php",
-            "time": "2017-08-30T08:28:40+00:00"
+            "time": "2017-11-07T09:38:14+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

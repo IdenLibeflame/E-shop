@@ -21,10 +21,16 @@ class AdminGenresController extends Controller
 
     public function addGenre(Request $request)
     {
+        $pathToAttach = '/public/src/genreImage/';
+        $file = $request->file('image');
+        $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
+
+        $file->move(public_path().$pathToAttach, $filename);
+
         $genre = new Genre;
 
         $genre->name = $request->name;
-        $genre->image = $request->image;
+        $genre->image = '/public/src/genreImage/'.$filename;
         $genre->save();
 
         return redirect()->to('admin/showGenres');
@@ -48,9 +54,15 @@ class AdminGenresController extends Controller
 
     public function updateGenre(Request $request)
     {
+        $pathToAttach = '/public/src/genreImage/';
+        $file = $request->file('image');
+        $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
+
+        $file->move(public_path().$pathToAttach, $filename);
+
         $genre = Genre::find($request->id);
         $genre->name = $request->name;
-        $genre->image = $request->image;
+        $genre->image = '/public/src/genreImage/'.$filename;
         $genre->update();
 
         return redirect()->to('admin/showGenres');

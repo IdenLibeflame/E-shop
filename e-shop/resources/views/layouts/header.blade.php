@@ -16,6 +16,8 @@
 
     <!-- Styles -->
 
+
+    {{--Need for Stripe--}}
     <script>
         window.eShop = <?php echo json_encode([
             'user' => auth()->user()
@@ -23,17 +25,69 @@
     </script>
 
     <link rel="stylesheet" href="{{ URL::to('\src\img\img.css') }}">
+    <link rel="stylesheet" href="{{ url('\src\img\img.css') }}">
     @yield('styles')
 </head>
 <body>
 <div align="center">
     <div class="btn-group btn-group-justified">
-        <a href="/" class="btn btn-danger">My shop!</a>
+        <a href="/" class="btn btn-danger">Home</a>
     </div>
 </div>
 
-<div class="container">
+<div class="container container-fluid">
     <div class="row" align="center">
+
+
+        {{--<nav class="navbar navbar-default">--}}
+            {{--<div class="container-fluid">--}}
+                {{--<!-- Brand and toggle get grouped for better mobile display -->--}}
+                {{--<div class="navbar-header">--}}
+                    {{--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">--}}
+
+                    {{--</button>--}}
+                    {{--<a class="navbar-brand" href="/">Home</a>--}}
+                {{--</div>--}}
+
+
+            {{--<ul class="nav navbar-nav">--}}
+                {{--<li><a href="/basket"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Basket--}}
+                        {{--<span class="badge">{{ Session::has('basket') ? Session::get('basket')->totalQuantity : '' }}</span></a></li>--}}
+                {{--<li><a href="/search">Search</a></li>--}}
+                {{--<li><a href="/genre">Genres</a></li>--}}
+            {{--</ul>--}}
+
+                {{--<ul class="nav navbar-nav navbar-right">--}}
+
+                    {{--@if (Route::has('login'))--}}
+                        {{--@auth--}}
+                        {{--<li><a href="{{ route('/profile') }}" >Profile</a></li>--}}
+                        {{--<li><a href="{{ route('/feedback') }}" >Feedback</a></li>--}}
+
+                        {{--@if(Auth::user()->isAdmin == 1)--}}
+                            {{--<li><a href="{{ route('admin/index') }}" >Panel of Power!</a></li>--}}
+                        {{--@endif--}}
+
+                        {{--<li><a href="{{ route('logout') }}"--}}
+                           {{--onclick="event.preventDefault();--}}
+                       {{--document.getElementById('logout-form').submit();">Logout </a></li>--}}
+
+                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                            {{--{{ csrf_field() }}--}}
+                        {{--</form>--}}
+
+                    {{--@else--}}
+                        {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+                        {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
+                        {{--@endauth--}}
+                    {{--@endif--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--</nav>--}}
+
+
+
+
         <div class="btn-group btn-group-justified">
             <a href="/basket" class="btn btn-warning">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> basket

@@ -10,7 +10,7 @@ class ProfileController extends Controller
     public function index()
     {
 //        dd(auth()->id());
-        $orderList = Order::where('user_id', auth()->id())->get();
+        $orderList = Order::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
         $orderList->transform(function ($order, $key) {
             $order->basket = unserialize($order->basket);
             return $order;

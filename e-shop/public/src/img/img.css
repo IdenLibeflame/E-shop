@@ -4,6 +4,10 @@
 
 }
 
+.test {
+    width: 25%;
+}
+
 /*.cat div {*/
     /*margin-left: 15px;*/
 /*}*/
@@ -22,4 +26,32 @@
 .price {
     font-weight: bold;
     font-size: 16px;
+}
+
+.book_info {
+    width: 50%;
+    height: 90px;
+}
+
+.rating-size {
+    width: 25%;
+    height: 90px;
+}
+
+.posted-size {
+    font-size: 110%;
+    color: black;
+}
+
+.label-comment {
+    color: black;
+}
+
+.rating {
+    background: #ebccd1;
+    max-width: 120px;
+}
+
+.hr {
+    border-color: black;
 }
