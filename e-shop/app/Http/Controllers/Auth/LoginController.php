@@ -32,30 +32,9 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/';
 
-//    protected function redirectTo()
-//    {
-//        return redirect(session()->pull('from',$this->redirectTo));
-//    }
-//
-//    protected function authenticated(Request $request, $user)
-//    {
-//        dd($request->url());
-//
-//        return redirect()->back();
-//    }
-
-//    public function authenticate()
-//    {
-//        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-//            // Аутентификация успешна...
-//            return redirect()->intended();
-//        }
-//    }
-
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {

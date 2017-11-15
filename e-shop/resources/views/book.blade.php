@@ -7,7 +7,7 @@
             <div class="col-xs-6 col-md-6 col-lg-3" style="width: 50%">
                 {{--<ul class="list-group">--}}
                 <br>
-                    <img src="{{ $book->image }}" alt="..." style="max-height: 250px;">
+                    <img src="{{ $book->image }}" alt="...">
 {{--                    <li>{{ $book->id }}</li>--}}
                     {{--<li class="list-group-item">Title: {{ $book->name }}</li>--}}
                     {{--<li class="list-group-item">Author: {{ $book->writer }}</li>--}}
@@ -37,9 +37,9 @@
                         <div class="panel-heading">Author:</div>
                         <div class="panel-body">{{ $book->writer }}</div>
                     </div>
-                    <div class="panel panel-info book_info">
+                    <div class="panel panel-info book_info1">
                         <div class="panel-heading">Description:</div>
-                        <div class="panel-body">{{ $book->description }}</div>
+                        <div class="panel-body" >{{ $book->description }}</div>
                     </div>
                     <div class="panel panel-danger book_info">
                         <div class="panel-heading">Price:</div>
@@ -93,14 +93,17 @@
                                                 <br>
                                                 <br>
                                                 {{--<br>--}}
-                                                @if(Auth::user()->isAdmin == 1)
+                                                @if(Auth::user() && Auth::user()->isAdmin == 1)
                                                     <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}" class="btn btn-warning">Delete</a>
+                                                    <br>
                                                 @elseif(Auth::user() == $comment->user)
 
                                                     <div class="test">
                                                         <a href="#" class="edit btn btn-warning" >Edit</a>
                                                         <a href="{{ route('comment.delete', ['comment_id' => $comment->id]) }}" class="btn" style="background: grey; color: white">Delete</a>
                                                     </div>
+                                                {{--@elseif(auth()->guest())--}}
+                                                    {{--you have to login or register--}}
                                                 @endif
                                                 {{--<br>--}}
                                                 <br>

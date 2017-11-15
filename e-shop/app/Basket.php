@@ -2,10 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Basket
-//class Basket extends Model
 {
     public $items = null;
     public $totalQuantity = 0;
@@ -50,7 +47,7 @@ class Basket
     public function reduceItem($id)
     {
         $this->totalQuantity -= $this->items[$id]['qty'];
-        number_format($this->totalPrice -= $this->items[$id]['price'], 2);
+        $this->totalPrice -= $this->items[$id]['price'];
         unset($this->items[$id]);
     }
 }

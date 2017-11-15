@@ -1,26 +1,6 @@
-.thumbnail img {
-    max-height: 350px;
-    max-width: 180px;
-
-}
-
 .test {
     width: 25%;
 }
-
-/*.cat div {*/
-    /*margin-left: 15px;*/
-/*}*/
-
-/*.cat div {*/
-    /*width: 150px;*/
-    /*height: 250px;*/
-/*}*/
-
-/*.add-to-basket div {*/
-    /*height: 30px;*/
-    /*width: 50px;*/
-/*}*/
 
 
 .price {
@@ -31,6 +11,20 @@
 .book_info {
     width: 50%;
     height: 90px;
+}
+
+.book_info1 {
+    width: 50%;
+}
+
+.book_info2 {
+    width: 25%;
+    display: inline-block;
+}
+
+.book_info3 {
+    width: 20%;
+    display: inline-block;
 }
 
 .rating-size {
@@ -54,4 +48,19 @@
 
 .hr {
     border-color: black;
+}
+
+.my-btn {
+    background: grey;
+    color: white;
+}
+
+.my-span {
+    font-weight: bold;
+}
+
+.my-btn2 {
+    width: 33%;
+    display:inline;
+    float: left;
 }

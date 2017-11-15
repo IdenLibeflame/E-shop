@@ -21,7 +21,6 @@ class isAdmin
         $user = User::find($userId);
 
         if (!$user->isAdmin) {
-//            return view('admin.index');
             return redirect('404');
         }
 

@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name', 64)->unique();
             $table->string('writer');
-            $table->string('description');
+            $table->text('description');
             $table->float('price')->unsigned()->ceil();
             $table->float('current_price')->unsigned()->nullable()->ceil();
             $table->boolean('availability')->unsigned();

@@ -166,6 +166,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 //        Laravel\Socialite\SocialiteServiceProvider::class,
 
 
@@ -235,6 +236,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

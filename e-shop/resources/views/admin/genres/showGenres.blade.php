@@ -1,20 +1,25 @@
 @extends('layouts.header')
 
 @section('content')
-    <ul>
-        <a href="createGenre">Create a new genre</a>
+    <br>
+    <a href="{{ route('admin/createGenre') }}" class="btn btn-info">Create a new genre</a>
+    <div class="container ">
+        <div class="row" align="center">
+            <br>
             @foreach($genres as $genre)
-                <li><h1>{{ $genre->name }}</h1></li>
-                <img src="{{ $genre->image }}" alt="..." style="max-height: 250px; max-width: 150px">
-            <a href="{{ route('admin/editGenre', ['genre_id' => $genre->id]) }}">Edit genre</a>
-{{--            <a href="{{ route('admin/{name}/updateGenre/') }}">Update genre</a>--}}
-{{--            <a href="{{ route('admin/{name}/updateGenre/{genre_id}', ['genre_name' => $genre->name, 'genre_id' => $genre->id]) }}/updateGenre">Update genre</a>--}}
-
-            <a href="{{ route('admin/deleteGenre', ['genre_id' => $genre->id]) }}">Delete genre</a>
+                <div class="col-xs-6 col-md-4 col-lg-4 ">
+                    <h1>{{ $genre->name }}</h1>
+                    <img src="{{ $genre->image }}" alt="...">
+                    <br>
+                    <br>
+                    <div>
+                        <a href="{{ route('admin/editGenre', ['genre_id' => $genre->id]) }}" class="btn btn-warning">Edit genre</a>
+                        <a href="{{ route('admin/deleteGenre', ['genre_id' => $genre->id]) }}" class="btn my-btn">Delete genre</a>
+                    </div>
+                </div>
             @endforeach
+        </div>
+    </div>
 
-    </ul>
-
-    {!! $genres->render() !!}
+    <div align="center">{!! $genres->render() !!}</div>
 @endsection
-

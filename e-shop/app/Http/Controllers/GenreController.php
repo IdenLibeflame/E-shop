@@ -9,7 +9,7 @@ class GenreController extends Controller
 {
     public function genre()
     {
-        $genres = Genre::all();
+        $genres = Genre::paginate(3);
         return view('genres', compact('genres'));
     }
 }

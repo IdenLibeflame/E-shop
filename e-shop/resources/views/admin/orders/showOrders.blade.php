@@ -1,18 +1,30 @@
 @extends('layouts.header')
 
 @section('content')
-    <ul>
-        <a href="{{ route('admin/processedOrders') }}">Show processed orders</a>
-        <a href="{{ route('admin/unprocessedOrders') }}">Show unprocessed orders</a>
+<div>
+    <br>
+    <a href="{{ route('admin/processedOrders') }}" class="btn btn-success">Show processed orders</a>
+    <a href="{{ route('admin/unprocessedOrders') }}" class="btn btn-danger">Show unprocessed orders</a>
+</div>
+<div class="container ">
         @foreach($orders as $order)
-            <li><h1>{{ $order->name }}</h1></li>
-            <img src="{{ $order->image }}" alt="..." style="max-height: 250px; max-width: 150px">
-            <a href="{{ route('admin/showOrder', ['order_id' => $order->id]) }}">Processing</a>
-        
+            <div class="col-xs-6 col-md-4 col-lg-4">
+                <h3>{{ $order->name }}</h3>
+                <p>{{ $order->created_at }}</p>
+                <a href="{{ route('admin/showOrder', ['order_id' => $order->id]) }}" class="btn btn-warning">Change status</a>
+            </div>
         @endforeach
 
-    </ul>
-
-    {!! $orders->render() !!}
+</div>
+<div align="center">{{ $orders->render() }}</div>
 @endsection
 
+
+
+{{--<div class="col-xs-6 col-md-4 col-lg-4">--}}
+    {{--<a href="genre/{{ $genre->name }}" class="thumbnail" >--}}
+        {{--<img src="{{ $genre->image }}" alt="...">--}}
+
+        {{--<h1 class=""> {{ $genre->name }}</h1>--}}
+    {{--</a>--}}
+{{--</div>--}}

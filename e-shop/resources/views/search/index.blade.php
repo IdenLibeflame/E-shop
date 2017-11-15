@@ -33,7 +33,7 @@
     </form>
 </div>
     @if(isset($results))
-        <ul>
+        <div class="row">
             @foreach($results as $result)
                 @if($result->availability)
                     <div class="col-sm-6 col-md-4">
@@ -42,12 +42,11 @@
                             <img src="{{ $result->image }}" alt="...">
                             {{--</a>--}}
                             <div class="caption">
-                                <h4>"{{ $result->name }}" - {{ $result->writer }}</h4>
-                                <p>{{ $result->description }}</p>
+                                <h4>"{{ $result->name }}"</h4>
+                                <cite><h4 align="right">{{ $result->writer }}</h4></cite>
                                 <p>
-                                <div class="pull-left price">{{ $result->current_price }}</div>
-                                <a href="{{ route('basket.addToBasket', ['id' => $result->id]) }}" class="btn btn-primary" role="button">Add to Basket</a>
-                                <a href="{{ route('book', [$result->genre_name, $result->id]) }}" class="btn btn-default pull-right" role="button">More info</a>
+                                    <a href="{{ route('basket.addToBasket', ['id' => $result->id]) }}" class="btn btn-primary" role="button">Add to Basket</a>
+                                    <a href="{{ route('book', [$result->genre_name, $result->id]) }}" class="btn btn-default pull-right" role="button">More info</a>
                                 </p>
                             </div>
 
@@ -59,8 +58,9 @@
 
             @endforeach
 
-        </ul>
-        {!!$results->render() !!}
+        </div>
+        <div align="center">{{ $results->render()  }} </div>
+
     @endif
 
 

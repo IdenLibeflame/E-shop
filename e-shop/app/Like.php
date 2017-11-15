@@ -32,23 +32,5 @@ class Like extends Model
         }
 
         return $results;
-
-//        $likes = Like::where('comment_id', $commentId)->where('rating', 1)->count();
-//
-//
-//
-//        if (Like::where('comment_id', $commentId)) {
-//            $likes = Like::where('comment_id', $commentId)->where('rating', 1)->count();
-//
-//            $dislikes = Like::where('comment_id', $commentId)->where('rating', 0)->count();
-//
-//            return $result = $likes - $dislikes;
-//        } else {
-//            return $result = 0;
-//        }
-
-
-
-
     }
 }

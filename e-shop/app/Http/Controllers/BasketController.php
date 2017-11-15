@@ -18,22 +18,14 @@ use Stripe\Charge;
 
 class BasketController extends Controller
 {
-//    public function index()
-//    {
-//        $products = Product::all();
-//        dd($products);
-//        return view('basket.index', compact('products'));
-//    }
-
     public function addToBasket(Request $request, $id)
     {
         $product = Product::find($id);
         $oldBasket = Session::has('basket') ? Session::get('basket') : null;
         $basket = new Basket($oldBasket);
         $basket->add($product, $product->id);
-//        dd($basket);
         $request->session()->put('basket', $basket);
-//        dd($request->session()->get('basket'));
+
         return redirect()->back();
     }
 
@@ -77,43 +69,22 @@ class BasketController extends Controller
         $basket = new Basket($oldBasket);
 
         return view('basket.index', ['products' => $basket->items, 'totalPrice' => $basket->totalPrice,]);
-//        return view('basket.index', compact(['items', 'totalPrice']));
-
     }
-
-//    public function getCheckout()
-//    {
-//        if (!Session::has('basket')) {
-//            return view('basket.index');
-//        }
-//
-//        $oldBasket = Session::get('basket');
-//        $basket = new Basket($oldBasket);
-//        $total = $basket->totalPrice;
-//        return view('basket.checkout', compact('total'));
-//    }
 
     public function postCheckout()
     {
-
-
         if (!Session::has('basket')) {
             return redirect()->route('basket.index');
         }
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
 
-//        dd($basket);
-
         Stripe::setApiKey(config('services.stripe.secret'));
-
-//        dd(request());
 
         try {
             $customer = Customer::create([
                 'email' => request('stripeEmail'),
                 'source' => request('stripeToken'),
-//                'address' => request('shippingAddress'),
             ]);
 
             $charge = Charge::create([
@@ -122,29 +93,9 @@ class BasketController extends Controller
                 'currency' => 'usd'
             ]);
 
-//            $address = [
-//                'country' => request('shipping_address_country'),
-////                'zip' => request('shipping_address_zip'),
-//                'state' => request('shipping_address_state'),
-//                'line1' => request('shipping_address_line1'),
-//                'city' => request('shipping_address_city'),
-////                'country_code' => request('shipping_address_country_code')
-//            ];
-//
-//            $shippingDetails = [
-//                'name' => request('shipping_name'),
-//                'address' => $address
-//            ];
-//
-//            $charge->shipping = $shippingDetails;
-//            $charge->save();
-
         } catch (\Exception $e) {
-//            return back()->withErrors(['payment' => $e->getMessage()]);
             return redirect()->back()->with('error', $e->getMessage());
-//            return response()->json(['status' => $e->getMessage()], 422);
         }
-
 
         $order = new Order();
         $order->user_id = auth()->id();
@@ -162,113 +113,12 @@ class BasketController extends Controller
         $newOrder = Auth::user()->orders()->save($order);
 
         event(new OrderShipped($newOrder->id));
-//        dispatch(new SendEmail($newOrder->id));
-//        SendEmail::dispatch($newOrder);
 
         Session::forget('basket');
-        Session::flash('Success' ,'Payment was successful!');
+        Session::flash('Success', 'Payment was successful!');
+
         return redirect()->route('/');
 
 
-//        try {
-//            Charge::create(array(
-//                "amount" => $basket->totalPrice * 100,
-//                "currency" => "usd",
-//                "source" => $request->input('stripeToken'), // obtained with Stripe.js
-//                "description" => "Test Charge",
-//                "customer" => auth()->id()
-//            ));
-//
-////            $order = new Order();
-////            $order->basket = serialize($basket);
-////            $order->address = $request->input('address');
-////            $order->name = $request->input('name');
-////            $order->payment_id = $charge->id;
-////            Auth::user()->orders()->save($order);
-//
-//        } catch (\Exception $e) {
-//            return redirect()->route('checkout')->with('error', $e->getMessage());
-//        }
-//
-//
-//        Session::forget('basket');
-//        return redirect()->route('basket.index')->with('success', 'Successfully purchased products!');
     }
-
-//    public function postCheckout(Request $request)
-//    {
-//        if (!Session::has('basket')) {
-//            return redirect()->route('basket.index');
-//        }
-//        $oldBasket = Session::get('basket');
-//        $basket = new Basket($oldBasket);
-//
-//        return $this->chargeCustomer($basket->items, $basket->totalQuantity, $basket->totalPrice, $request->input('stripeToken'));
-//    }
-//
-//    public function chargeCustomer($items, $totalQuantity, $totalPrice, $token)
-//    {
-//        Stripe::setApiKey(env('STRIPE_SECRET'));
-//
-//        if (!$this->isStripeCustomer())
-//        {
-//            $customer = $this->createStripeCustomer($token);
-//        }
-//        else
-//        {
-//            $customer = Customer::retrieve(Auth::user()->stripe_id);
-//        }
-//
-//        return $this->createStripeCharge($items, $totalQuantity, $totalPrice, $customer);
-//    }
-//
-//    public function createStripeCharge($items, $totalQuantity, $totalPrice, $customer)
-//    {
-//        try {
-//            $charge = Charge::create(array(
-//                "amount" => $totalPrice,
-//                "currency" => "brl",
-//                "customer" => $customer->id,
-//                "description" => $items
-//            ));
-//        } catch(Card $e) {
-//            return redirect()
-//                ->route('/')
-//                ->with('error', 'Your credit card was been declined. Please try again or contact us.');
-//        }
-//
-//        return $this->postStoreOrder($items);
-//    }
-//
-//    public function createStripeCustomer($token)
-//    {
-//        Stripe::setApiKey(env('STRIPE_SECRET'));
-//
-//        $customer = Customer::create(array(
-//            "description" => Auth::user()->email,
-//            "source" => $token
-//        ));
-//
-//        Auth::user()->stripe_id = $customer->id;
-//        Auth::user()->save();
-//
-//        return $customer;
-//    }
-//
-//    public function isStripeCustomer()
-//    {
-//        return Auth::user() && User::where('id', Auth::user()->id)->whereNotNull('stripe_id')->first();
-//    }
-//
-//    public function postStoreOrder($product_name)
-//    {
-//        Order::create([
-//            'email' => Auth::user()->email,
-//            'product' => $product_name
-//        ]);
-//
-//        return redirect()
-//            ->route('/')
-//            ->with('msg', 'Thanks for your purchase!');
-//    }
 }

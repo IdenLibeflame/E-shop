@@ -25,7 +25,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ URL::to('\src\img\img.css') }}">
-    <link rel="stylesheet" href="{{ url('\src\img\img.css') }}">
+    {{--<link rel="stylesheet" href="{{ url('\src\img\img.css') }}">--}}
     @yield('styles')
 </head>
 <body>
@@ -90,17 +90,17 @@
 
         <div class="btn-group btn-group-justified">
             <a href="/basket" class="btn btn-warning">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> basket
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Basket
                 <span class="badge">{{ Session::has('basket') ? Session::get('basket')->totalQuantity : '' }}</span>
             </a>
-            <a href="/search" class="btn btn-warning">search</a>
-            <a href="/genre" class="btn btn-warning">genre</a>
+            <a href="/search" class="btn btn-warning">Search</a>
+            <a href="/genre" class="btn btn-warning">Genre</a>
 
 
             @if (Route::has('login'))
                 @auth
-                <a href="{{ route('/profile') }}" class="btn btn-warning">profile</a>
-                <a href="{{ route('/feedback') }}" class="btn btn-warning">Contact us</a>
+                <a href="{{ route('/profile') }}" class="btn btn-warning">Profile</a>
+                <a href="{{ route('/feedback') }}" class="btn btn-warning">Feedback</a>
 
                 @if(Auth::user()->isAdmin == 1)
                     <a href="{{ route('admin/index') }}" class="btn btn-warning">Panel of Power!</a>
@@ -115,8 +115,8 @@
                 </form>
 
             @else
-                <a href="{{ route('login') }}" class="btn btn-danger btn-lg">Login</a>
-                <a href="{{ route('register') }}" class="btn btn-danger btn-lg">Register</a>
+                <a href="{{ route('login') }}" class="btn btn-danger ">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-danger">Register</a>
                 @endauth
             @endif
             {{--<a href="#" class="btn btn-warning">{{ $name }}</a>--}}

@@ -9,21 +9,21 @@ class AdminOrderController extends Controller
 {
     public function showAllOrders()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::paginate(3);
 
         return view('admin.orders.showOrders', compact('orders'));
     }
 
     public function processedOrders()
     {
-        $orders = Order::where('status', 1)->get();
+        $orders = Order::where('status', 1)->paginate(3);
 
         return view('admin.orders.processedOrders', compact('orders'));
     }
 
     public function unprocessedOrders()
     {
-        $orders = Order::where('status', 0)->get();
+        $orders = Order::where('status', 0)->paginate(3);
 
         return view('admin.orders.unprocessedOrders', compact('orders'));
     }
@@ -37,20 +37,12 @@ class AdminOrderController extends Controller
             return $order;
         });
 
-//        dd($order);
-
         return view('admin.orders.processingOrder', compact('order'));
     }
 
     public function processingOrder(Request $request)
     {
         $order = Order::find($request->id);
-//        $order->user_id = $request->user_id;
-//        $order->name = $request->name;
-//        $order->email = $request->email;
-//        $order->address = $request->address;
-//        $order->basket = serialize($request->basket);
-//        $order->payment_id = $request->payment_id;
         $order->status = $request->status;
 
         $order->update();

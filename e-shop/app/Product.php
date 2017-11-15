@@ -9,10 +9,6 @@ class Product extends Model
 {
     use Searchable;
 
-//    protected $fillable = [
-//      'current_price'
-//    ];
-
     public function comments()
     {
         return $this->hasMany('App\Comment');
@@ -33,11 +29,15 @@ class Product extends Model
     public function getCurrentPriceAttribute()
     {
         if ($this->discount > 0) {
-            return $current_price = $this->price - $this->price * $this->discount;
+            return number_format($current_price = $this->price - $this->price * $this->discount, 2);
         } else {
-            return $current_price = $this->price;
+            return number_format($current_price = $this->price, 2);
         }
-//        return $this->discount > 0 ? $this->price - $this->price * $this->discount : $this->price;
 
+    }
+
+    public function getImageNameAttribute()
+    {
+        return $this->imageName = explode('/', $this->image);
     }
 }

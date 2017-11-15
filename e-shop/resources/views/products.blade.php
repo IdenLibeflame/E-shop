@@ -1,8 +1,8 @@
 @extends('layouts.header')
 
 @section('content')
-    <div align="center">
-        {{ $name }}
+    <div align="center" class="alert alert-success">
+        <h4>{{ $name }}</h4>
     </div>
 
 
@@ -15,12 +15,12 @@
                 <img src="{{ $product->image }}" alt="...">
             {{--</a>--}}
                 <div class="caption">
-                    <h4>"{{ $product->name }}" - {{ $product->writer }}</h4>
-                    <p>{{ $product->description }}</p>
+                    <h4>"{{ $product->name }}"</h4>
+                    <cite><h4 align="right">{{ $product->writer }}</h4></cite>
+                    <p class="price">Price: ${{ $product->current_price }}</p>
                     <p>
-                        <div class="pull-left price">{{ $product->current_price }}</div>
                         <a href="{{ route('basket.addToBasket', ['id' => $product->id]) }}" class="btn btn-primary" role="button">Add to Basket</a>
-                        <a href="{{ route('book', [$name, $product->id]) }}" class="btn btn-default pull-right" role="button">More info</a>
+                        <a href="{{ route('book', [$product->genre_name, $product->id]) }}" class="btn btn-default pull-right" role="button">More info</a>
                     </p>
                 </div>
 
@@ -38,8 +38,9 @@
                 <h2>Don't worry! It's temporary!</h2>
             </div>
         @endforelse
-            {!! $products->render() !!}
+
 
     </div>
+    <div align="center">{!! $products->render() !!}</div>
 @endsection
 

@@ -24,17 +24,6 @@ class FeedbackController extends Controller
         ];
 
         Mail::to('Iden.Libeflame@gmail.com')->send(new FeedbackShipped($data));
-//        $data = [
-//            'message' => $request->message,
-//            'email' => $request->email,
-//            'name' => $request->name,
-//        ];
-//
-//        Mail::send('emails.userMessage', $data, function ($message) use ($data) {
-//            $message->from($data['email']);
-//            $message->to('Iden.Libeflame@gmail.com');
-//            $message->subject($data['message']);
-//        });
 
         Session::flash('Success' ,'Your email has been sent');
 

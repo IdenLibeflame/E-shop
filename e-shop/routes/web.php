@@ -123,9 +123,9 @@ Route::group(['middleware' => ['isAdmin']], function () {
 
     Route::get('admin/index', 'AdminController@index')->name('admin/index');
 
-    Route::get('admin/showGenres', 'AdminGenresController@showAllGenres');
+    Route::get('admin/showGenres', 'AdminGenresController@showAllGenres')->name('admin/showGenres');
 
-    Route::get('admin/createGenre', 'AdminGenresController@createGenre');
+    Route::get('admin/createGenre', 'AdminGenresController@createGenre')->name('admin/createGenre');
 
     Route::post('admin/addGenre', 'AdminGenresController@addGenre')->name('admin/addGenre');
 
@@ -137,9 +137,9 @@ Route::group(['middleware' => ['isAdmin']], function () {
 
     // ПРОДУКТЫ
 
-    Route::get('admin/showProducts', 'AdminProductsController@showAllProducts');
+    Route::get('admin/showProducts', 'AdminProductsController@showAllProducts')->name('admin/showProducts');
 
-    Route::get('admin/createProduct', 'AdminProductsController@createProduct');
+    Route::get('admin/createProduct', 'AdminProductsController@createProduct')->name('admin/createProduct');
 
     Route::post('admin/addProduct', 'AdminProductsController@addProduct')->name('admin/addProduct');
 
@@ -153,7 +153,7 @@ Route::group(['middleware' => ['isAdmin']], function () {
 
 // ЗАКАЗЫ
 
-    Route::get('admin/showOrders', 'AdminOrderController@showAllOrders');
+    Route::get('admin/showOrders', 'AdminOrderController@showAllOrders')->name('admin/showOrders');
 
     Route::get('admin/showOrder/{order_id}', 'AdminOrderController@showOrder')->name('admin/showOrder');
 
@@ -180,9 +180,9 @@ Route::group(['middleware' => ['isAdmin']], function () {
 //Route::get('admin/editGenre/{genre_id}', 'AdminGenresController@editGenre')->name('admin/editGenre')->middleware(isAdmin::class);
 //
 //Route::post('admin/updateGenre', 'AdminGenresController@updateGenre')->name('admin/updateGenre')->middleware(isAdmin::class);
-
+//
 // ПРОДУКТЫ
-
+//
 //Route::get('admin/showProducts', 'AdminProductsController@showAllProducts')->middleware(isAdmin::class);
 //
 //Route::get('admin/createProduct', 'AdminProductsController@createProduct')->middleware(isAdmin::class);

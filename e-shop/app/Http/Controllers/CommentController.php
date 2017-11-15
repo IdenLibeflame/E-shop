@@ -19,26 +19,23 @@ class CommentController extends Controller
         // Валидация
 
         $comment = $request['new-post'];
-
         $user_id = $request['_userId'];
-
         $product_id = $request['_productId'];
 
-//        Разобрать
-//        $user_id = Auth::id();
-//
-//        $product_id = Input::get('_productId');
+        Comment::insert(['comment' => $comment, 'user_id' => $user_id, 'product_id' => $product_id]);
 
-        DB::table('comments')->insert([
-            'comment' => $comment, 'user_id' => $user_id, 'product_id' => $product_id
-        ]);
+//        DB::table('comments')->insert([
+//            'comment' => $comment, 'user_id' => $user_id, 'product_id' => $product_id
+//        ]);
 
         return redirect()->back();
     }
 
     public function deleteComment($comment_id)
     {
-        DB::table('comments')->where('id', $comment_id)->delete();
+//        DB::table('comments')->where('id', $comment_id)->delete();
+        $comment = Comment::where('id', $comment_id);
+        $comment->delete();
 
         return redirect()->back();
     }
@@ -51,9 +48,7 @@ class CommentController extends Controller
         ]);
 
         $comment = Comment::find($request['commentId']);
-
         $comment->comment = $request['comment'];
-
         $comment->update();
 
         return response()->json(['new_comment' => $comment->comment], 200);
@@ -63,7 +58,6 @@ class CommentController extends Controller
     {
         $comment_id = $request['commentId'];
         $is_like = $request['isLike'] === 'true';
-//        $update = false;
         $comment = Comment::find($comment_id);
         if (!$comment) {
             return null;
@@ -94,27 +88,7 @@ class CommentController extends Controller
 
         $like->save();
 
-//        if ($update) {
-//            $like->update();
-//        } else {
-//            $like->save();
-//        }
-
         return response()->json(['rating' => $comment->rating()], 200);
-//        return $rating;
     }
 
-//    public function ratingComment(Request $request)
-//    {
-//        $comment_id = $request['commentId'];
-//
-//        $rating = Like::showRating($comment_id);
-//
-//        if (!$rating) {
-//            return null;
-//        }
-//
-////        return response()->json(['new_rating' => $rating], 200);
-//        return $rating;
-//    }
 }

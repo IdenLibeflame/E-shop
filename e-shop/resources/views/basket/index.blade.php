@@ -46,7 +46,7 @@
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <strong>Total price: {{ $totalPrice }}</strong>
+                        <strong>Total price: ${{ $totalPrice }}</strong>
                     </li>
                 </ul>
             </div>

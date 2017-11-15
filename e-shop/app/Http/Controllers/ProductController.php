@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
         $products = null;
 
-        $products = Product::where('genre_name', $name)->paginate(5);
+        $products = Product::where('genre_name', $name)->paginate(3);
 
         if ($products->count()) {
             return view('products', compact(['products', 'name']));
@@ -30,9 +30,6 @@ class ProductController extends Controller
 
     public function product($genreName, $id)
     {
-//        $comments = DB::table('comments')
-//                            ->where('product_id', $book_id)
-//                            ->get();
         $book = Product::where('genre_name', $genreName)->where('id', $id)->first();
 
         if (!$book) {
@@ -40,45 +37,23 @@ class ProductController extends Controller
         }
 
         $allComments = Product::find($id)->comments;
-//        dd($allComments[1]->comment);
         $ratings = Like::showRating($allComments);
-//        dd($ratings);
-//        $book = Product::where('id', $id)->get();
-
 
         return view('book', compact('book', 'comments', 'ratings'));
-//        return view('book', compact(['book', 'productComments', 'nameOfWriterComment', 'count']));
 
     }
 
     public function search()
     {
-
         $query = request()->input('query');
-
-        $results = Product::search($query)->paginate(1);
-
-//        return back()->with('results', $results);
+        $results = Product::search($query)->paginate(3);
 
         return view('search.index', compact('results'));
     }
 
     public function newBooks()
     {
-//        $newBooks = Product::orderBy('created_at', 'desc')->take(3)->get();
-        $newBooks = Product::orderBy('created_at', 'desc')->paginate(6);
-
-//        dd($newBooks);
-
-
-//        $bestsellers = Order::orderBy('basket', 'desc')->take(3)->get();
-//
-//        $bestsellers->transform(function ($order, $key) {
-//            $order->basket = unserialize($order->basket);
-//            return $order;
-//        });
-
-//        dd($bestsellers[0]->basket);
+        $newBooks = Product::orderBy('created_at', 'desc')->paginate(3);
 
         return view('e-shop', compact('newBooks'));
     }

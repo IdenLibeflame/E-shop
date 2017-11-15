@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <div class="container container-fluid">
-        <p class="h1" align="center">Last added Books!</p>
+    <div class="alert alert-info">
+        <h4 align="center">Last added Books </h4>
     </div>
 
     <div class="row">
-        @foreach($newBooks as $newBook)
+        @forelse($newBooks as $newBook)
             @if($newBook->availability)
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
@@ -15,7 +15,8 @@
                         <img src="{{ $newBook->image }}" alt="...">
                         {{--</a>--}}
                         <div class="caption">
-                            <h4>"{{ $newBook->name }}" by {{ $newBook->writer }}</h4>
+                            <h4>"{{ $newBook->name }}"</h4>
+                            <cite><h4 align="right">{{ $newBook->writer }}</h4></cite>
                             <p class="price">Price: ${{ $newBook->current_price }}</p>
                             <p>
                             <a href="{{ route('basket.addToBasket', ['id' => $newBook->id]) }}" class="btn btn-primary" role="button">Add to Basket</a>
@@ -27,12 +28,11 @@
 
                 </div>
             @endif
-
-        @endforeach
-
-
+        @empty
+            <p class="alert alert-danger" align="center">We don't have new books, but it's temporary!</p>
+        @endforelse
     </div>
-    {!! $newBooks->render() !!}
+    <div align="center">{{ $newBooks->render() }} </div>
 
 
 
