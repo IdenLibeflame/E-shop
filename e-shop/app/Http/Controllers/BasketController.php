@@ -68,7 +68,7 @@ class BasketController extends Controller
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
 
-        return view('basket.index', ['products' => $basket->items, 'totalPrice' => $basket->totalPrice,]);
+        return view('basket.index', ['products' => $basket->items, 'totalPrice' => $basket->totalPrice]);
     }
 
     public function postCheckout()

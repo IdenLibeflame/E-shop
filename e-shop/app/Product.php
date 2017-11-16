@@ -24,7 +24,7 @@ class Product extends Model
         return 'name';
     }
 
-    // Мутатор
+    // Мутаторы
 
     public function getCurrentPriceAttribute()
     {

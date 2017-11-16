@@ -16,6 +16,11 @@ class FeedbackController extends Controller
 
     public function sendFeedback(Request $request)
     {
+        $this->validate($request, [
+            'subject' => 'max:24',
+            'message' => 'max: 255',
+        ]);
+
         $data = [
             'subject' => $request->subject,
             'message' => $request->message,
@@ -23,9 +28,9 @@ class FeedbackController extends Controller
             'name' => $request->name,
         ];
 
-        Mail::to('Iden.Libeflame@gmail.com')->send(new FeedbackShipped($data));
+        Mail::to('Iden.Libeflame@gmail.com')->send(new FeedbackShipped($data, $request->email));
 
-        Session::flash('Success' ,'Your email has been sent');
+        Session::flash('Success', 'Your email has been sent');
 
         return redirect()->to('/');
     }

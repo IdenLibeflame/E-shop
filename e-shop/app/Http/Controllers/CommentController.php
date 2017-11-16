@@ -15,25 +15,22 @@ class CommentController extends Controller
 {
     public function createComment(Request $request)
     {
-
-        // Валидация
+        $this->validate($request, [
+            'comment' => 'max:4096',
+        ]);
 
         $comment = $request['new-post'];
-        $user_id = $request['_userId'];
-        $product_id = $request['_productId'];
+        $userId = $request['_userId'];
+        $productId = $request['_productId'];
 
-        Comment::insert(['comment' => $comment, 'user_id' => $user_id, 'product_id' => $product_id]);
+        Comment::insert(['comment' => $comment, 'user_id' => $userId, 'product_id' => $productId]);
 
-//        DB::table('comments')->insert([
-//            'comment' => $comment, 'user_id' => $user_id, 'product_id' => $product_id
-//        ]);
 
         return redirect()->back();
     }
 
     public function deleteComment($comment_id)
     {
-//        DB::table('comments')->where('id', $comment_id)->delete();
         $comment = Comment::where('id', $comment_id);
         $comment->delete();
 
@@ -56,22 +53,22 @@ class CommentController extends Controller
 
     public function likeComment(Request $request)
     {
-        $comment_id = $request['commentId'];
-        $is_like = $request['isLike'] === 'true';
-        $comment = Comment::find($comment_id);
+        $commentId = $request['commentId'];
+        $isLike = $request['isLike'] === 'true';
+        $comment = Comment::find($commentId);
         if (!$comment) {
             return null;
         }
 
         $user = Auth::user();
-        $like = $user->likes()->where('comment_id', $comment_id)->first();
+        $like = $user->likes()->where('comment_id', $commentId)->first();
 
         if ($like) {
             // Получаем значение поля "лайк", хранящееся в базе
             // (если он есть для этого коммента от этого юзера)
-            $already_like = $like->rating;
+            $alreadyLike = $like->rating;
 //            $update = true;
-            if ($already_like == $is_like) {
+            if ($alreadyLike == $isLike) {
                 // Если значение поля "лайк" в базе равно значению,
                 // Переданному через форму - удаляем его (снимаем лайк)
                 $like->delete();
@@ -82,9 +79,9 @@ class CommentController extends Controller
             $like = new Like();
         }
 
-        $like->rating = $is_like;
+        $like->rating = $isLike;
         $like->user_id = $user->id;
-        $like->comment_id = $comment_id;
+        $like->comment_id = $commentId;
 
         $like->save();
 

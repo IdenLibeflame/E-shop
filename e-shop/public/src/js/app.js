@@ -45,27 +45,6 @@ $('.like').on('click', function (event) {
 
             event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this comment' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this comment' : 'Dislike';
 
-
-
-
-            // if (isLike) {
-            //     event.target.innerText == 'Like';
-            //     if (event.target.innerText == 'Like') {
-            //         event.target.innerText = 'You like this comment';
-            //     } else {
-            //         event.target.innerText = 'Like';
-            //     }
-            // } else {
-            //     event.target.innerText == 'Dislike';
-            //     if (event.target.innerText == 'Dislike') {
-            //         event.target.innerText = 'You don\'t like this comment';
-            //     } else {
-            //         event.target.innerText = 'Dislike';
-            //
-            //     }
-            // }
-
-
             if (isLike) {
                 event.target.nextElementSibling.innerText = 'Dislike';
             } else {

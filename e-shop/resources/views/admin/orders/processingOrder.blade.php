@@ -15,8 +15,6 @@
         <p>Payment ID: : <b>{{ $order[0]->payment_id }}</b></p>
         <p>Customer payment ID: : <b>{{ $order[0]->customer_id }}</b></p>
 
-
-
         @foreach($order[0]->basket->items as $item)
             <ul>
                 <p>Title: {{ $item['item']['name'] }}</p>
@@ -28,10 +26,8 @@
             </ul>
         @endforeach
 
-            <p><b>Total Price:</b> {{ $order[0]->basket->totalPrice }}</p>
+        <p><b>Total Price:</b> {{ $order[0]->basket->totalPrice }}</p>
 
-
-        {{--<input type="hidden" name="payment_id" value="{{ $order[0]->payment_id }}">--}}
         <div>
             @if($order[0]->status)
                 <p>Current status: Processed</p>
@@ -42,7 +38,7 @@
             <select name="status">
                 <option value="{{ $order[0]->status }}" selected></option>
                 <option value="1">Processed</option>
-                <option value="0"> Unprocessed </option>
+                <option value="0"> Unprocessed</option>
             </select>
         </div>
         <br>

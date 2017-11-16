@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function newBooks()
     {
-        $newBooks = Product::orderBy('created_at', 'desc')->paginate(3);
+        $newBooks = Product::orderBy('created_at', 'desc')->where('availability', 1)->paginate(3);
 
         return view('e-shop', compact('newBooks'));
     }

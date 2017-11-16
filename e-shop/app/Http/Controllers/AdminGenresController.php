@@ -22,21 +22,24 @@ class AdminGenresController extends Controller
 
     public function addGenre(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:16',
+        ]);
+
         $pathToAttach = '/public/src/genreImage/';
         $file = $request->file('image');
-//        $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
-        $filename = $file->getClientOriginalName();
+        $filename = str_random(20) . '.' . $file->getClientOriginalExtension() ?: 'png';
 
-        $file->move(public_path().$pathToAttach, $filename);
+        $file->move(public_path() . $pathToAttach, $filename);
 
-        $img = Image::make(public_path().$pathToAttach.$filename);
+        $img = Image::make(public_path() . $pathToAttach . $filename);
         $img->resize(240, 320);
         $img->save();
 
         $genre = new Genre;
 
         $genre->name = $request->name;
-        $genre->image = '/public/src/genreImage/'.$filename;
+        $genre->image = '/public/src/genreImage/' . $filename;
         $genre->save();
 
         return redirect()->to('admin/showGenres');
@@ -60,25 +63,26 @@ class AdminGenresController extends Controller
 
     public function updateGenre(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:16',
+        ]);
+
         $genre = Genre::find($request->id);
 
         if ($request->file('image')) {
             $pathToAttach = '/public/src/genreImage/';
             $file = $request->file('image');
-//        $filename = str_random(20). '.' .$file->getClientOriginalExtension() ?: 'png';
-            $filename = $file->getClientOriginalName();
+            $filename = str_random(20) . '.' . $file->getClientOriginalExtension() ?: 'png';
 
+            if (strcmp($genre->image, $pathToAttach . $filename) !== 0) {
+                $file->move(public_path() . $pathToAttach, $filename);
 
-
-            if (strcmp($genre->image, $pathToAttach.$filename) !==0) {
-                $file->move(public_path().$pathToAttach, $filename);
-
-                $img = Image::make(public_path().$pathToAttach.$filename);
+                $img = Image::make(public_path() . $pathToAttach . $filename);
                 $img->resize(240, 320);
                 $img->save();
 
                 $genre->name = $request->name;
-                $genre->image = '/public/src/genreImage/'.$filename;
+                $genre->image = '/public/src/genreImage/' . $filename;
                 $genre->update();
             } else {
                 $genre->name = $request->name;
@@ -88,9 +92,6 @@ class AdminGenresController extends Controller
             $genre->name = $request->name;
             $genre->update();
         }
-
-
-
 
 
         return redirect()->to('admin/showGenres');

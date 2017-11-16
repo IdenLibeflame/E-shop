@@ -28,10 +28,10 @@ Route::get('/feedback', 'FeedbackController@index')->name('/feedback');
 Route::post('/sendFeedback', 'FeedbackController@sendFeedback')->name('sendFeedback');
 
 
-Route::get('/genre', 'GenreController@genre');
+Route::get('/genre', 'GenreController@genre')->name('genre');
 
 
-Route::get('/genre/{name}', 'ProductController@products')->name('name');
+Route::get('/genre/{name}', 'ProductController@products')->where('name', '[A-Za-z]+')->name('name');
 
 Route::get('/genre/{name}/book/{book_id}', 'ProductController@product')->name('book');
 
@@ -39,15 +39,19 @@ Route::get('/reduce/{id}', 'BasketController@reduceByOne');
 
 Route::get('/remove/{id}', 'BasketController@removeItem');
 
-Route::post('/createcomment', [
-    'uses' => 'CommentController@createComment',
-    'as' => 'comment.create'
-]);
+//Route::post('/createcomment', [
+//    'uses' => 'CommentController@createComment',
+//    'as' => 'comment.create'
+//]);
 
-Route::get('/deletecomment/{comment_id}', [
-   'uses' => 'CommentController@deleteComment',
-    'as' => 'comment.delete'
-]);
+Route::post('/createComment', 'CommentController@createComment')->name('commentCreate');
+
+//Route::get('/deletecomment/{comment_id}', [
+//   'uses' => 'CommentController@deleteComment',
+//    'as' => 'comment.delete'
+//]);
+
+Route::get('/deleteComment/{comment_id}', 'CommentController@deleteComment')->name('commentDelete');
 
 Route::get('/search/', function () {
     return view('search.index');
@@ -77,29 +81,37 @@ Route::get('login/callback/{provider}', 'SocialAuthController@callback');
 //   return response()->json(['message' => $request['commentId']]);
 //})->name('edit');
 
-Route::post('/edit', [
-    'uses' => 'CommentController@editComment',
-    'as' => 'edit'
-]);
+//Route::post('/edit', [
+//    'uses' => 'CommentController@editComment',
+//    'as' => 'edit'
+//]);
 
-Route::post('/like', [
-    'uses' => 'CommentController@likeComment',
-    'as' => 'like'
-]);
+Route::post('/edit', 'CommentController@editComment')->name('edit');
 
-Route::post('/rating', [
-    'uses' => 'CommentController@ratingComment',
-    'as' => 'rating'
-]);
+//Route::post('/like', [
+//    'uses' => 'CommentController@likeComment',
+//    'as' => 'like'
+//]);
+
+Route::post('/like', 'CommentController@likeComment')->name('like');
+
+//Route::post('/rating', [
+//    'uses' => 'CommentController@ratingComment',
+//    'as' => 'rating'
+//]);
+
+Route::post('/rating', 'CommentController@ratingComment')->name('rating');
 
 Route::get('/profile', 'ProfileController@index')->name('/profile')->middleware('auth');
 
 Route::get('/basket', 'BasketController@getBasket');
 
-Route::get('/add-to-basket/{id}', [
-    'uses' => 'BasketController@addToBasket',
-    'as' => 'basket.addToBasket'
-]);
+//Route::get('/add-to-basket/{id}', [
+//    'uses' => 'BasketController@addToBasket',
+//    'as' => 'basket.addToBasket'
+//]);
+
+Route::get('/addToBasket/{id}', 'BasketController@addToBasket')->name('basket.addToBasket');
 
 Route::get('checkout', 'BasketController@getCheckout')->name('checkout');
 
@@ -118,10 +130,13 @@ Route::post('checkout', 'BasketController@postCheckout')->name('checkout');
 
 Route::group(['middleware' => ['isAdmin']], function () {
 
+    Route::get('admin/index', function () {
+        return view('admin.index');
+    })->name('admin/index');
+
+    //    Route::get('admin/index', 'AdminController@index')->name('admin/index');
 
 // ЖАНРЫ
-
-    Route::get('admin/index', 'AdminController@index')->name('admin/index');
 
     Route::get('admin/showGenres', 'AdminGenresController@showAllGenres')->name('admin/showGenres');
 

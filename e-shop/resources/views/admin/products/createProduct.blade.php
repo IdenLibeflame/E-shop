@@ -1,28 +1,37 @@
 @extends('layouts.header')
 
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('admin/addProduct') }}" method="post" enctype="multipart/form-data">
         <br>
-        <p> Title: <input type="text" name="name"> </p>
-        <p> Author: <input type="text" name="writer"> </p>
-        {{--<p> Description: <input type="text" name="description"> </p>--}}
-        <p> Description: <textarea wrap="hard" rows="3" cols="50" name="description" class="form-control" placeholder="Your comment" style="resize: none; width: 50%" ></textarea> </p>
-        <p> Price: <input type="text" name="price"> </p>
-        <p> Discount: <input type="text" name="discount"> </p>
+        <p> Title: <input type="text" name="name" required></p>
+        <p> Author: <input type="text" name="writer" required></p>
+        <p> Description: <textarea wrap="hard" rows="3" cols="50" name="description" class="form-control" placeholder="Your comment" style="resize: none; width: 50%" required></textarea></p>
+        <p> Price: <input type="text" name="price" required></p>
+        <p> Discount: <input type="text" name="discount"></p>
         <br>
         <p>In stock?</p>
 
-        <select name="availability">
+        <select name="availability" required>
             <option value="1">Present</option>
-            <option value="0"> Absent </option>
+            <option value="0"> Absent</option>
         </select>
-        
+
         <br>
         <br>
         <p>Choose genres:</p>
-        <select name="genre_name">
+        <select name="genre_name" required>
             @foreach($genresList as $genre)
-                {{--<p> {{ $genre->name }} <input type="checkbox" name="genre_name" value="{{ $genre->name }}"> </p>--}}
                 <option value="{{ $genre->name }}">{{ $genre->name }}</option>
             @endforeach
         </select>
